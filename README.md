@@ -1,3 +1,3 @@
-# CheckoutMenu
+# ReservationMenu
 
 Table of Contents
