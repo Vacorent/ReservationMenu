@@ -9,22 +9,20 @@ const calendarDateSchema = new mongoose.Schema({
   cost: Number,
   costCurrency: String,
 },
-  {
-  timestamps: false
-  }
-);
+{
+  timestamps: false,
+});
 
 const resDataSchema = new mongoose.Schema({
   _id: Number,
   reviewAverage: Number,
   reviewCount: Number,
   guestCapacity: Number,
-  calendar: [calendarDateSchema]
+  calendar: [calendarDateSchema],
 },
-  {
-    timestamps: false
-  }
-);
+{
+  timestamps: false,
+});
 
 const Reservation = mongoose.model('reservations', resDataSchema);
 
