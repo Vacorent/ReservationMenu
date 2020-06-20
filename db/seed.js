@@ -1,5 +1,6 @@
 const moment = require('moment');
 const db = require('./index.js');
+const mongoose = require('mongoose');
 const Reservation = require('./Reservation.js');
 
 const today = moment();
@@ -29,5 +30,6 @@ const sampleReservation = {
 
 const insertSampleCalendarDates = (function () {
   Reservation.create(sampleReservation)
-    .then(() => db.disconnect());
+    .then(() => mongoose.connection.close())
+    .catch((err) => console.log('error in seeding ', err));
 }());
