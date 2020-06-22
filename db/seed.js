@@ -1,5 +1,5 @@
 const moment = require('moment');
-// const db = require('./index.js');
+require('./index.js');
 const mongoose = require('mongoose');
 const Reservation = require('./Reservation.js');
 
