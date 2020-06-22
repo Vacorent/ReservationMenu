@@ -1,12 +1,9 @@
 import React from 'react';
 
 const Header = (props) => (
-  <li className="feed-list-item">
-    <div className="feed-list-item-title" onClick={props.handleClick}>{props.data.title}</div>
-<div className="feed-list-item-byline"><span className="feed-list-item-byline-author">{props.data.author}</span> {props.data.createdAt}</div>
-    <img src={props.data.imageUrl} onClick={props.handleClick} className="feed-list-item-image"/>
-    <span className="feed-list-item-lede">{props.data.body}</span>
-  </li>
+  <div>
+    <div className="price"><b>${props.price}</b><span className="ptext"> / night </span><span className="star">&#11088;</span><span className="rating">{props.rating} ({props.reviewCount})</span></div>
+  </div>
 )
 
 export default Header;

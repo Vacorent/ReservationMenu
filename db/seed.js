@@ -21,7 +21,7 @@ for (let i = 0; i < 365; i += 1) {
   });
 }
 
-const rating = 4.5; /* Math.floor(Math.random()*5 + 1).toFix(1); */
+const rating = 4.52; /* Math.floor(Math.random()*5 + 1).toFix(1); */
 const numberOfReviews = 563;
 const capacity = 4;
 const sampleReservation = {
