@@ -18,7 +18,11 @@
 
 ## Usage
 
-> Some usage instructions
+> Start mongo (Linux: sudo service mongod start | Mac: mongod)
+> npm run seed
+> npm run server-dev
+> (separate terminal) npm run react-dev
+> (in browser) url: http://localhost:3004
 
 ## Requirements
 
