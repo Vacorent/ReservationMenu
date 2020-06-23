@@ -5,7 +5,7 @@ const Reservation = require('./Reservation.js');
 
 const today = moment();
 
-const cost = 149;
+const cost = 175;
 const curr = 'USD';
 const weekendMultipler = 1.2;
 
