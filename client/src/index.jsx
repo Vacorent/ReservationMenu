@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-import Header from './components/Header.jsx';
-import Calendar from './components/Calendar.jsx';
+import Header from './components/Header';
+import Calendar from './components/Calendar';
 
 class App extends React.Component {
   constructor() {
@@ -13,8 +13,8 @@ class App extends React.Component {
       rating: 0,
       reviewCount: 0,
       capacity: 0,
-      calendar: []
-    }
+      calendar: [],
+    };
   }
 
   componentDidMount() {
@@ -28,7 +28,7 @@ class App extends React.Component {
         console.log('good get ', res.data['0']);
         setData(res.data['0']);
       })
-      .catch((err) => {console.log('error in get ', err)});
+      .catch((err) => { console.log('error in get ', err); });
   }
 
   setData(data) {
@@ -38,21 +38,22 @@ class App extends React.Component {
       reviewCount: data.reviewCount,
       capacity: data.guestCapacity,
       calendar: data.calendar,
-    })
+    });
   }
 
-
   render() {
-    const price = this.state.price;
-    const rating = this.state.rating.toFixed(2);
-    const reviewCount = this.state.reviewCount;
+    const {
+      price, reviewCount, capacity, calendar,
+    } = this.state;
+    let { rating } = this.state;
+    rating = rating.toFixed(2);
     return (
       <div>
         <Header price={price} rating={rating} reviewCount={reviewCount} />
-        <Calendar price={price}/>
-        <button className="availButton">Check availability</button>
+        <Calendar capacity={capacity} calendar={calendar} />
+        <button type="submit" className="availButton">Check availability</button>
       </div>
-    )
+    );
   }
 }
 
