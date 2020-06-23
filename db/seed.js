@@ -5,7 +5,7 @@ const Reservation = require('./Reservation.js');
 
 const today = moment();
 
-const cost = 175;
+const cost = 149;
 const curr = 'USD';
 const weekendMultipler = 1.2;
 
@@ -23,7 +23,7 @@ for (let i = 0; i < 365; i += 1) {
 
 const rating = 4.52; /* Math.floor(Math.random()*5 + 1).toFix(1); */
 const numberOfReviews = 563;
-const capacity = 4;
+const capacity = 6;
 const sampleReservation = {
   _id: 0,
   reviewAverage: rating,

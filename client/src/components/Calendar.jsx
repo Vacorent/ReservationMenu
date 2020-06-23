@@ -25,8 +25,8 @@ class Calendar extends React.Component {
         <tbody>
           <tr>
             <td colSpan="2" className="guests">
-              <div className="staticText">GUESTS</div>
-              <div className="darkDynamicText">1 guest</div>
+              <div className="guestText1">GUESTS</div>
+              <div className="guestText2">1 guest</div>
               <div className="downArrow">&#8964;</div>
             </td>
           </tr>
