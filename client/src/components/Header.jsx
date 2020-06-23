@@ -22,7 +22,7 @@ const Header = ({ rating, price, reviewCount }) => (
 );
 
 Header.propTypes = {
-  rating: PropTypes.number.isRequired,
+  rating: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   reviewCount: PropTypes.number.isRequired,
 };
