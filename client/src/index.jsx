@@ -50,7 +50,7 @@ class App extends React.Component {
     return (
       <div>
         <Header price={price} rating={rating} reviewCount={reviewCount} />
-        <br></br>
+        <br />
         <Calendar capacity={capacity} calendar={calendar} />
         <button type="submit" className="availButton">Check availability</button>
       </div>

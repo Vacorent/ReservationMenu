@@ -1,4 +1,5 @@
 import React from 'react';
+import Guests from './Guests';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -24,11 +25,7 @@ class Calendar extends React.Component {
         </tbody>
         <tbody>
           <tr>
-            <td colSpan="2" className="guests">
-              <div className="guestText1">GUESTS</div>
-              <div className="guestText2">1 guest</div>
-              <div className="downArrow">&#8964;</div>
-            </td>
+            <Guests />
           </tr>
         </tbody>
       </table>
