@@ -48,7 +48,7 @@ class App extends React.Component {
     let { rating } = this.state;
     rating = rating.toFixed(2);
     return (
-      <div>
+      <div id="root">
         <Header price={price} rating={rating} reviewCount={reviewCount} />
         <br />
         <Calendar capacity={capacity} calendar={calendar} />
