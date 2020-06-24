@@ -1,6 +1,6 @@
 import React from 'react';
-import Guests from './Guests';
 import PropTypes from 'prop-types';
+import Guests from './Guests';
 
 class Calendar extends React.Component {
   constructor(props) {

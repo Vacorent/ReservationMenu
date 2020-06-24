@@ -16,13 +16,50 @@ class Guests extends React.Component {
     console.log('table clicked');
     const { isDropdown } = this.state;
     this.setState({
-      isDropdown: !isDropdown
-    })
+      isDropdown: !isDropdown,
+    });
     e.preventDefault();
   }
 
+  changeGuestCount(type, inc) {
+    const { adultCount, childCount, infantCount } = this.state;
+    if (type === 'adult') {
+      if (inc === 1) {
+        this.setState({
+          adultCount: adultCount + 1
+        })
+      } else {
+        this.setState({
+          adultCount: adultCount - 1
+        })
+      }
+    } else if (type === 'child') {
+      if (inc === 1) {
+        this.setState({
+          childCount: childCount + 1
+        })
+      } else {
+        this.setState({
+          childCount: childCount - 1
+        })
+      }
+    } else if (type === 'infant') {
+      if (inc === 1) {
+        this.setState({
+          infantCount: infantCount + 1
+        })
+      } else {
+        this.setState({
+          infantCount: infantCount - 1
+        })
+      }
+    }
+  }
+
   renderView() {
-    const { isDropdown, adultCount, childCount, infantCount } = this.state;
+    const {
+      isDropdown, adultCount, childCount, infantCount,
+    } = this.state;
     const { capacity } = this.props;
     if (isDropdown) {
       return (
@@ -32,24 +69,24 @@ class Guests extends React.Component {
               <div>Adults</div>
             </td>
             <td className="guestButtonsTD">
-              <button className="">-</button>
+              <button className="guestButton" type="button" onClick={() => {this.changeGuestCount('adult', 0)}}>-</button>
               {' '}
               {adultCount}
               {' '}
-              <button>+</button>
+              <button className="guestButton" type="button" onClick={() => {this.changeGuestCount('adult', 1)}}>+</button>
             </td>
           </tr>
           <tr className="guestRow">
             <td>
               <div>Children</div>
-              <div className="guestStatic">Ages 2 - 12</div>
+              <div className="guestStatic" type="button">Ages 2 - 12</div>
             </td>
             <td className="guestButtonsTD">
-              <button>-</button>
+              <button className="guestButton" type="button" onClick={() => {this.changeGuestCount('child', 0)}}>-</button>
               {' '}
               {childCount}
               {' '}
-              <button>+</button>
+              <button className="guestButton" type="button" onClick={() => {this.changeGuestCount('child', 1)}}>+</button>
             </td>
           </tr>
           <tr className="guestRow">
@@ -58,38 +95,37 @@ class Guests extends React.Component {
               <div className="guestStatic">Under 2</div>
             </td>
             <td className="guestButtonsTD">
-              <button>-</button>
+              <button className="guestButton" type="button" onClick={() => {this.changeGuestCount('infant', 0)}}>-</button>
               {' '}
               {infantCount}
               {' '}
-              <button>+</button>
+              <button className="guestButton" type="button" onClick={() => {this.changeGuestCount('infant', 1)}}>+</button>
             </td>
           </tr>
           <tr className="guestRow">
             <td colSpan="2" className="maxCapacityText">
-              {capacity} guests maximum. Infants don't count toward the number of guests.
+              {capacity}
+              {' '}
+              guests maximum. Infants don't count toward the number of guests.
             </td>
           </tr>
           <tr className="guestRow">
             <td colSpan="2" className="guestButtonsTD">
-              <button className="closeButton" onClick={this.dropdownClick}>Close</button>
+              <button className="closeButton" onClick={this.dropdownClick} type="button">Close</button>
             </td>
           </tr>
         </tbody>
-      )
-    } else {
-      return;
+      );
     }
-
+    return null;
   }
 
   renderArrow() {
     const { isDropdown } = this.state;
     if (isDropdown) {
-      return <div className="uparrow">&#8963;</div>
-    } else {
-      return <div className="downarrow">&#8964;</div>
+      return <div className="uparrow">&#8963;</div>;
     }
+    return <div className="downarrow">&#8964;</div>;
   }
 
   render() {

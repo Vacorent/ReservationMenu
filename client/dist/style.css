@@ -141,11 +141,13 @@ td {
   display: block;
   position: absolute;
   background-color: white;
-  width: 335px;
+  width: 300px;
   box-shadow: 10px 10px 10px -10px rgba(0,0,0,0.2), 10px 10px 10px -10px rgba(0,0,0,0.2), -10px 10px 10px -10px rgba(0,0,0,0.2);
   z-index: 1;
   font-weight: 600;
   font-size: 1.2em;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .guestRow {
@@ -165,7 +167,32 @@ td {
 
 .guestButtonsTD {
   text-align: right;
-  padding-right: 25px;
+}
+
+.guestCounter {
+  width: 10%;
+}
+
+button.guestButton {
+  transform: scale(1.75,1.75);
+  width: 13%;
+  margin: 5px;
+  border-radius: 50%;
+  border-width: 1px;
+  border-color: grey;
+  border-style: solid;
+  background-color: white;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+button.guestButton:hover {
+  border-color: black;
+}
+
+button.guestButton:focus {
+  outline: 0;
 }
 
 .closeButton {
