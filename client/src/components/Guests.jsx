@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Guests extends React.Component {
   constructor(props) {
@@ -26,32 +27,32 @@ class Guests extends React.Component {
     if (type === 'adult') {
       if (inc === 1) {
         this.setState({
-          adultCount: adultCount + 1
-        })
+          adultCount: adultCount + 1,
+        });
       } else {
         this.setState({
-          adultCount: adultCount - 1
-        })
+          adultCount: adultCount - 1,
+        });
       }
     } else if (type === 'child') {
       if (inc === 1) {
         this.setState({
-          childCount: childCount + 1
-        })
+          childCount: childCount + 1,
+        });
       } else {
         this.setState({
-          childCount: childCount - 1
-        })
+          childCount: childCount - 1,
+        });
       }
     } else if (type === 'infant') {
       if (inc === 1) {
         this.setState({
-          infantCount: infantCount + 1
-        })
+          infantCount: infantCount + 1,
+        });
       } else {
         this.setState({
-          infantCount: infantCount - 1
-        })
+          infantCount: infantCount - 1,
+        });
       }
     }
   }
@@ -69,11 +70,11 @@ class Guests extends React.Component {
               <div>Adults</div>
             </td>
             <td className="guestButtonsTD">
-              <button className="guestButton" type="button" onClick={() => {this.changeGuestCount('adult', 0)}}>-</button>
+              <button className="guestButton" type="button" onClick={() => { this.changeGuestCount('adult', 0); }}>-</button>
               {' '}
               {adultCount}
               {' '}
-              <button className="guestButton" type="button" onClick={() => {this.changeGuestCount('adult', 1)}}>+</button>
+              <button className="guestButton" type="button" onClick={() => { this.changeGuestCount('adult', 1); }}>+</button>
             </td>
           </tr>
           <tr className="guestRow">
@@ -82,11 +83,11 @@ class Guests extends React.Component {
               <div className="guestStatic" type="button">Ages 2 - 12</div>
             </td>
             <td className="guestButtonsTD">
-              <button className="guestButton" type="button" onClick={() => {this.changeGuestCount('child', 0)}}>-</button>
+              <button className="guestButton" type="button" onClick={() => { this.changeGuestCount('child', 0); }}>-</button>
               {' '}
               {childCount}
               {' '}
-              <button className="guestButton" type="button" onClick={() => {this.changeGuestCount('child', 1)}}>+</button>
+              <button className="guestButton" type="button" onClick={() => { this.changeGuestCount('child', 1); }}>+</button>
             </td>
           </tr>
           <tr className="guestRow">
@@ -95,18 +96,19 @@ class Guests extends React.Component {
               <div className="guestStatic">Under 2</div>
             </td>
             <td className="guestButtonsTD">
-              <button className="guestButton" type="button" onClick={() => {this.changeGuestCount('infant', 0)}}>-</button>
+              <button className="guestButton" type="button" onClick={() => { this.changeGuestCount('infant', 0); }}>-</button>
               {' '}
               {infantCount}
               {' '}
-              <button className="guestButton" type="button" onClick={() => {this.changeGuestCount('infant', 1)}}>+</button>
+              <button className="guestButton" type="button" onClick={() => { this.changeGuestCount('infant', 1); }}>+</button>
             </td>
           </tr>
           <tr className="guestRow">
             <td colSpan="2" className="maxCapacityText">
+              {' '}
               {capacity}
               {' '}
-              guests maximum. Infants don't count toward the number of guests.
+              guests maximum. Infants don&apos;t count toward the number of guests.
             </td>
           </tr>
           <tr className="guestRow">
@@ -136,7 +138,7 @@ class Guests extends React.Component {
       <>
         <tbody>
           <tr>
-            <td colSpan="2" className="guests" onClick={this.dropdownClick}>
+            <td colSpan="2" className="guests" onClick={this.dropdownClick} onKeyDown={this.dropdownClick} role="presentation">
               <div className="guestText1">GUESTS</div>
               <div className="guestText2">
                 {totalCount}
@@ -152,5 +154,9 @@ class Guests extends React.Component {
     );
   }
 }
+
+Guests.propTypes = {
+  capacity: PropTypes.number.isRequired,
+};
 
 export default Guests;
