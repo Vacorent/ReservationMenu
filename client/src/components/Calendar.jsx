@@ -9,6 +9,7 @@ class Calendar extends React.Component {
   }
 
   render() {
+    const { capacity } = this.props;
     return (
       <table className="table">
         <tbody>
@@ -24,9 +25,7 @@ class Calendar extends React.Component {
           </tr>
         </tbody>
         <tbody>
-          <tr>
-            <Guests />
-          </tr>
+          <Guests capacity={capacity}/>
         </tbody>
       </table>
     );
