@@ -122,18 +122,57 @@ td {
   color: black;
 }
 
-.downArrow {
+.downarrow {
   margin-left: 300px;
   margin-top: 10px;
   width: 10%;
   transform: scale(2.5,2.5);
 }
 
+.uparrow {
+  margin-left: 300px;
+  margin-top: 27px;
+  width: 10%;
+  transform: scale(2.5,2.5);
+}
+
 .dropdownGuests {
+  border-top: 1px solid black;
   display: block;
   position: absolute;
   background-color: white;
-  width: 340px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0);
+  width: 335px;
+  box-shadow: 10px 10px 10px -10px rgba(0,0,0,0.2), 10px 10px 10px -10px rgba(0,0,0,0.2), -10px 10px 10px -10px rgba(0,0,0,0.2);
   z-index: 1;
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
+.guestRow {
+  height: 60px;
+}
+
+.guestStatic {
+  font-weight: 300;
+  font-size: .8em;
+}
+
+.maxCapacityText {
+  font-size: 0.7em;
+  font-weight: 300;
+  color: grey;
+}
+
+.guestButtonsTD {
+  text-align: right;
+  padding-right: 25px;
+}
+
+.closeButton {
+  font-family: 'Montserrat', sans-serif;
+  border: none;
+  background-color: white;
+  text-decoration: underline;
+  font-size: 1.2em;
+  font-weight: 600;
 }

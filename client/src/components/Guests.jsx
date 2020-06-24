@@ -22,21 +22,57 @@ class Guests extends React.Component {
   }
 
   renderView() {
-    const { isDropdown } = this.state;
+    const { isDropdown, adultCount, childCount, infantCount } = this.state;
+    const { capacity } = this.props;
     if (isDropdown) {
       return (
         <tbody className="dropdownGuests">
-          <tr>
+          <tr className="guestRow">
             <td>
-              <div>Test1</div>
+              <div>Adults</div>
             </td>
-            <td>
-              <button>Hello</button>
+            <td className="guestButtonsTD">
+              <button className="">-</button>
+              {' '}
+              {adultCount}
+              {' '}
+              <button>+</button>
             </td>
           </tr>
-          <tr >
+          <tr className="guestRow">
             <td>
-              <div>22</div>
+              <div>Children</div>
+              <div className="guestStatic">Ages 2 - 12</div>
+            </td>
+            <td className="guestButtonsTD">
+              <button>-</button>
+              {' '}
+              {childCount}
+              {' '}
+              <button>+</button>
+            </td>
+          </tr>
+          <tr className="guestRow">
+            <td>
+              <div>Infants</div>
+              <div className="guestStatic">Under 2</div>
+            </td>
+            <td className="guestButtonsTD">
+              <button>-</button>
+              {' '}
+              {infantCount}
+              {' '}
+              <button>+</button>
+            </td>
+          </tr>
+          <tr className="guestRow">
+            <td colSpan="2" className="maxCapacityText">
+              {capacity} guests maximum. Infants don't count toward the number of guests.
+            </td>
+          </tr>
+          <tr className="guestRow">
+            <td colSpan="2" className="guestButtonsTD">
+              <button className="closeButton" onClick={this.dropdownClick}>Close</button>
             </td>
           </tr>
         </tbody>
@@ -45,6 +81,15 @@ class Guests extends React.Component {
       return;
     }
 
+  }
+
+  renderArrow() {
+    const { isDropdown } = this.state;
+    if (isDropdown) {
+      return <div className="uparrow">&#8963;</div>
+    } else {
+      return <div className="downarrow">&#8964;</div>
+    }
   }
 
   render() {
@@ -62,7 +107,7 @@ class Guests extends React.Component {
                 {' '}
                 {guestText}
               </div>
-              <div className="downArrow">&#8964;</div>
+              {this.renderArrow()}
             </td>
           </tr>
         </tbody>
