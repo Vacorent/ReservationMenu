@@ -22,7 +22,7 @@
 > npm run seed\
 > npm run server-dev\
 > (separate terminal) npm run react-dev\
-> (in browser) url: http://localhost:3004\
+> (in browser) url: http://localhost:3004 \
 > (if eslint v7.3.0) line 236 of node_modules/eslint-config-airbnb-base/rules/imports.js needs to be changed from 'import/no-cycle': ['error', { maxDepth: Infinity }], to 'import/no-cycle': ['error', { maxDepth: 10 }],
 ## Requirements
 
