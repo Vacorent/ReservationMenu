@@ -23,7 +23,7 @@
 > npm run server-dev\
 > (separate terminal) npm run react-dev\
 > (in browser) url: http://localhost:3004
-
+> if running tests (npm run test), line 236 of node_modules/eslint-config-airbnb-base/rules/imports.js needs to be changed from 'import/no-cycle': ['error', { maxDepth: Infinity }], to 'import/no-cycle': ['error', { maxDepth: 10 }],
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
