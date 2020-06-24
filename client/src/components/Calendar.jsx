@@ -1,5 +1,6 @@
 import React from 'react';
 import Guests from './Guests';
+import PropTypes from 'prop-types';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -24,12 +25,14 @@ class Calendar extends React.Component {
             </td>
           </tr>
         </tbody>
-        <tbody>
-          <Guests capacity={capacity}/>
-        </tbody>
+        <Guests capacity={capacity} />
       </table>
     );
   }
 }
+
+Calendar.propTypes = {
+  capacity: PropTypes.number.isRequired,
+};
 
 export default Calendar;
