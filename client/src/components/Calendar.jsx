@@ -17,6 +17,7 @@ class Calendar extends React.Component {
     this.dropdownClick = this.dropdownClick.bind(this);
     this.prevMonthClick = this.prevMonthClick.bind(this);
     this.nextMonthClick = this.nextMonthClick.bind(this);
+    this.setDateClick = this.setDateClick.bind(this);
   }
 
   dropdownClick(e) {
@@ -50,6 +51,19 @@ class Calendar extends React.Component {
     e.preventDefault();
   }
 
+  setDateClick(date) {
+    const { startDate, endDate } = this.state;
+    if (startDate === '') {
+      this.setState({
+        startDate: date
+      })
+    } else if (endDate === '') {
+      this.setState({
+        endDate: date
+      })
+    }
+  }
+
   renderView() {
     const { isDropdown, currentMonth, currentMonthYear } = this.state;
     const { calendar } = this.props;
@@ -73,6 +87,7 @@ class Calendar extends React.Component {
                 data={calendar[currentMonth]}
                 monthNum={currentMonth}
                 yearNum={currentMonthYear}
+                setDateClick={this.setDateClick}
               />
             </td>
             <td>
@@ -86,6 +101,7 @@ class Calendar extends React.Component {
                 data={calendar[nextMonthNum]}
                 monthNum={nextMonthNum}
                 yearNum={nextMonthYear}
+                setDateClick={this.setDateClick}
               />
             </td>
           </tr>

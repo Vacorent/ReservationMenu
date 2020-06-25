@@ -7,6 +7,13 @@ class Month extends React.Component {
     super(props);
     this.state = {
     };
+    this.handleDateClick = this.handleDateClick.bind(this);
+  }
+
+  handleDateClick(date) {
+    const { setDateClick } = this.props;
+    setDateClick(date);
+    date.preventDefault();
   }
 
   renderView() {
@@ -51,10 +58,11 @@ class Month extends React.Component {
       rowCount += 1;
       const rowEntries = calRow.map((day) => {
         dayCount += 1;
+        const date = day !== '' ? Moment([yearNum, monthNum, day]).format("MM/DD/YYYY") : '';
         if (data[day] === undefined || data[day].isBooked === true) {
           return <td key={dayCount}><button className="invalidDate" type="button" disabled>{day}</button></td>;
         }
-        return <td key={dayCount}><button className="validDate" type="button">{day}</button></td>;
+        return <td key={dayCount}><button className="validDate" type="button" onClick={(() => this.handleDateClick(date))}>{day}</button></td>;
       });
       return (
         <tr key={rowCount}>
