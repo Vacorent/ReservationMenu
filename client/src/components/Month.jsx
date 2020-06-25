@@ -13,7 +13,6 @@ class Month extends React.Component {
   handleDateClick(date) {
     const { setDateClick } = this.props;
     setDateClick(date);
-    date.preventDefault();
   }
 
   renderView() {
@@ -82,16 +81,16 @@ class Month extends React.Component {
     return (
       <>
         <div>
-          <table>
+          <table className="monthCalendar">
             <thead>
               <tr>
-                <th>Su</th>
-                <th>Mo</th>
-                <th>Tu</th>
-                <th>We</th>
-                <th>Th</th>
-                <th>Fr</th>
-                <th>Sa</th>
+                <th className="daysOfWeek">Su</th>
+                <th className="daysOfWeek">Mo</th>
+                <th className="daysOfWeek">Tu</th>
+                <th className="daysOfWeek">We</th>
+                <th className="daysOfWeek">Th</th>
+                <th className="daysOfWeek">Fr</th>
+                <th className="daysOfWeek">Sa</th>
               </tr>
             </thead>
             <tbody>

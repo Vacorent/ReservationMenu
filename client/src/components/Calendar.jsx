@@ -18,6 +18,7 @@ class Calendar extends React.Component {
     this.prevMonthClick = this.prevMonthClick.bind(this);
     this.nextMonthClick = this.nextMonthClick.bind(this);
     this.setDateClick = this.setDateClick.bind(this);
+    this.clearDateClick = this.clearDateClick.bind(this);
   }
 
   dropdownClick(e) {
@@ -64,6 +65,14 @@ class Calendar extends React.Component {
     }
   }
 
+  clearDateClick(e) {
+    this.setState({
+      startDate: '',
+      endDate: '',
+    })
+    e.preventDefault();
+  }
+
   renderView() {
     const { isDropdown, currentMonth, currentMonthYear } = this.state;
     const { calendar } = this.props;
@@ -76,9 +85,9 @@ class Calendar extends React.Component {
       return (
         <tbody className="dropdownCalendar">
           <tr>
-            <td>
-              <button onClick={this.prevMonthClick} type="button">{'<'}</button>
-              <div>
+            <td className="calHeader">
+              <button onClick={this.prevMonthClick} type="button" className="prevMonthButton">{'<'}</button>
+              <div className="calHeaderText">
                 {textCurrMonth}
                 {' '}
                 {currentMonthYear}
@@ -90,9 +99,9 @@ class Calendar extends React.Component {
                 setDateClick={this.setDateClick}
               />
             </td>
-            <td>
-              <button onClick={this.nextMonthClick} type="button">{'>'}</button>
-              <div>
+            <td className="calHeader">
+              <button onClick={this.nextMonthClick} type="button" className="nextMonthButton">{'>'}</button>
+              <div className="calHeaderText">
                 {textNextMonth}
                 {' '}
                 {nextMonthYear}
@@ -107,8 +116,8 @@ class Calendar extends React.Component {
           </tr>
           <tr>
             <td colSpan="2" className="calendarButtons">
-              <button type="button">Clear dates</button>
-              <button type="button">Close</button>
+              <button type="button" onClick={this.clearDateClick} className="clearDates">Clear dates</button>
+              <button type="button" onClick={this.dropdownClick} className="closeCal">Close</button>
             </td>
           </tr>
         </tbody>
@@ -119,12 +128,20 @@ class Calendar extends React.Component {
 
   render() {
     const { capacity } = this.props;
-    let { startDate, endDate } = this.state;
+    let { startDate, endDate, isDropdown } = this.state;
     if (!startDate) {
-      startDate = 'Add date';
+      if (isDropdown) {
+        startDate = 'MM/DD/YYYY';
+      } else {
+        startDate = 'Add date';
+      }
     }
     if (!endDate) {
-      endDate = 'Add date';
+      if (isDropdown) {
+        endDate = 'MM/DD/YYYY';
+      } else {
+        endDate = 'Add date';
+      }
     }
     return (
       <table className="table">
