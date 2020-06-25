@@ -212,3 +212,18 @@ button.guestButton:focus {
   font-size: 1.2em;
   font-weight: 600;
 }
+
+.dropdownCalendar {
+  width: 800px;
+  height: 600px;
+  background-color: grey;
+  border-top: 1px solid black;
+  display: block;
+  position: absolute;
+  box-shadow: 10px 10px 10px -10px rgba(0,0,0,0.2), 10px 10px 10px -10px rgba(0,0,0,0.2), -10px 10px 10px -10px rgba(0,0,0,0.2);
+  z-index: 1;
+  font-weight: 600;
+  font-size: 1.2em;
+  padding-left: 15px;
+  padding-right: 15px;
+}

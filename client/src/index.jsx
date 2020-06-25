@@ -13,7 +13,7 @@ class App extends React.Component {
       rating: 0,
       reviewCount: 0,
       capacity: 0,
-      calendar: [],
+      calendar: {},
     };
   }
 
@@ -25,19 +25,19 @@ class App extends React.Component {
     const setData = this.setData.bind(this);
     axios.get('http://localhost:3004/reservation/0')
       .then((res) => {
-        console.log('good get ', res.data['0']);
-        setData(res.data['0']);
+        console.log('good get ', res.data['0'], res.data['1']);
+        setData(res.data['0'], res.data['1']);
       })
       .catch((err) => { console.log('error in get ', err); });
   }
 
-  setData(data) {
+  setData(data, cal) {
     this.setState({
-      price: data.calendar['0'].cost,
+      price: cal['0']['1'].cost,
       rating: data.reviewAverage,
       reviewCount: data.reviewCount,
       capacity: data.guestCapacity,
-      calendar: data.calendar,
+      calendar: cal,
     });
   }
 

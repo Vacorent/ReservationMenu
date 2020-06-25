@@ -10,7 +10,7 @@ const curr = 'USD';
 const weekendMultipler = 1.2;
 
 const sampleCalendarDates = [];
-for (let i = 0; i < 365; i += 1) {
+for (let i = 0; i < 330; i += 1) {
   const nextDay = today.add(1, 'days');
   const dayOfWeek = nextDay.day();
   const isWeekend = (dayOfWeek === 6) || (dayOfWeek === 0);
