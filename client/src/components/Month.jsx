@@ -57,11 +57,11 @@ class Month extends React.Component {
       rowCount += 1;
       const rowEntries = calRow.map((day) => {
         dayCount += 1;
-        const date = day !== '' ? Moment([yearNum, monthNum, day]).format("MM/DD/YYYY") : '';
+        const dateText = day !== '' ? Moment([yearNum, monthNum, day]).format('MM/DD/YYYY') : '';
         if (data[day] === undefined || data[day].isBooked === true) {
           return <td key={dayCount}><button className="invalidDate" type="button" disabled>{day}</button></td>;
         }
-        return <td key={dayCount}><button className="validDate" type="button" onClick={(() => this.handleDateClick(date))}>{day}</button></td>;
+        return <td key={dayCount}><button className="validDate" type="button" onClick={(() => this.handleDateClick(dateText))}>{day}</button></td>;
       });
       return (
         <tr key={rowCount}>
@@ -107,7 +107,7 @@ Month.propTypes = {
   monthNum: PropTypes.number.isRequired,
   yearNum: PropTypes.number.isRequired,
   data: PropTypes.objectOf(PropTypes.object).isRequired,
-
+  setDateClick: PropTypes.func.isRequired,
 };
 
 export default Month;

@@ -21,13 +21,17 @@ class Calendar extends React.Component {
     this.clearDateClick = this.clearDateClick.bind(this);
   }
 
-  dropdownClick(e) {
-    console.log('calendar clicked');
-    const { isDropdown } = this.state;
-    this.setState({
-      isDropdown: !isDropdown,
-    });
-    e.preventDefault();
+  setDateClick(date) {
+    const { startDate, endDate } = this.state;
+    if (startDate === '') {
+      this.setState({
+        startDate: date,
+      });
+    } else if (endDate === '') {
+      this.setState({
+        endDate: date,
+      });
+    }
   }
 
   prevMonthClick(e) {
@@ -52,24 +56,20 @@ class Calendar extends React.Component {
     e.preventDefault();
   }
 
-  setDateClick(date) {
-    const { startDate, endDate } = this.state;
-    if (startDate === '') {
-      this.setState({
-        startDate: date
-      })
-    } else if (endDate === '') {
-      this.setState({
-        endDate: date
-      })
-    }
+  dropdownClick(e) {
+    console.log('calendar clicked');
+    const { isDropdown } = this.state;
+    this.setState({
+      isDropdown: !isDropdown,
+    });
+    e.preventDefault();
   }
 
   clearDateClick(e) {
     this.setState({
       startDate: '',
       endDate: '',
-    })
+    });
     e.preventDefault();
   }
 
@@ -128,7 +128,8 @@ class Calendar extends React.Component {
 
   render() {
     const { capacity } = this.props;
-    let { startDate, endDate, isDropdown } = this.state;
+    let { startDate, endDate } = this.state;
+    const { isDropdown } = this.state;
     if (!startDate) {
       if (isDropdown) {
         startDate = 'MM/DD/YYYY';
