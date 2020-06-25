@@ -31,7 +31,7 @@ const makeMonths = (fullCalendar) => {
     monthsObj[currentMonth][currentDay] = fullCalendar[i];
   }
   return monthsObj;
-}
+};
 
 app.get('/reservation/:id', async (req, res) => {
   const reservationData = await Reservation.find({ _id: req.params.id }).exec();
@@ -44,8 +44,6 @@ app.get('/reservation/:id', async (req, res) => {
     res.status(200).send(reservationData);
   }
 });
-
-
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);

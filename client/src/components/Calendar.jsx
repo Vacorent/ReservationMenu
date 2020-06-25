@@ -63,28 +63,36 @@ class Calendar extends React.Component {
         <tbody className="dropdownCalendar">
           <tr>
             <td>
-              <button onClick={this.prevMonthClick}>{'<'}</button>
+              <button onClick={this.prevMonthClick} type="button">{'<'}</button>
               <div>
                 {textCurrMonth}
                 {' '}
                 {currentMonthYear}
               </div>
-              <Month data={calendar[currentMonth]} monthNum={currentMonth} yearNum={currentMonthYear} />
+              <Month
+                data={calendar[currentMonth]}
+                monthNum={currentMonth}
+                yearNum={currentMonthYear}
+              />
             </td>
             <td>
-              <button onClick={this.nextMonthClick}>{'>'}</button>
+              <button onClick={this.nextMonthClick} type="button">{'>'}</button>
               <div>
                 {textNextMonth}
                 {' '}
                 {nextMonthYear}
               </div>
-              <Month data={calendar[nextMonthNum]} monthNum={nextMonthNum} yearNum={nextMonthYear} />
+              <Month
+                data={calendar[nextMonthNum]}
+                monthNum={nextMonthNum}
+                yearNum={nextMonthYear}
+              />
             </td>
           </tr>
           <tr>
             <td colSpan="2" className="calendarButtons">
-              <button>Clear dates</button>
-              <button>Close</button>
+              <button type="button">Clear dates</button>
+              <button type="button">Close</button>
             </td>
           </tr>
         </tbody>
@@ -125,7 +133,7 @@ class Calendar extends React.Component {
 
 Calendar.propTypes = {
   capacity: PropTypes.number.isRequired,
-  calendar: PropTypes.object.isRequired,
+  calendar: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default Calendar;

@@ -45,15 +45,19 @@ class Month extends React.Component {
       date += 1;
     }
 
-    const calEntries = calRows.map((calRow, index) => {
-      const rowEntries = calRow.map((day, index) => {
+    let rowCount = 0;
+    let dayCount = 0;
+    const calEntries = calRows.map((calRow) => {
+      rowCount += 1;
+      const rowEntries = calRow.map((day) => {
+        dayCount += 1;
         if (data[day] === undefined || data[day].isBooked === true) {
-          return <td key={index}><button className="invalidDate" disabled>{day}</button></td>;
+          return <td key={dayCount}><button className="invalidDate" type="button" disabled>{day}</button></td>;
         }
-        return <td key={index}><button className="validDate">{day}</button></td>;
+        return <td key={dayCount}><button className="validDate" type="button">{day}</button></td>;
       });
       return (
-        <tr key={index}>
+        <tr key={rowCount}>
           {rowEntries}
         </tr>
       );
@@ -67,8 +71,6 @@ class Month extends React.Component {
   }
 
   render() {
-    const { data, monthNum, yearNum } = this.props;
-
     return (
       <>
         <div>
@@ -94,39 +96,11 @@ class Month extends React.Component {
   }
 }
 
-// const Month = ({ data, monthNum, yearNum }) => {
-//   const formattedMonth = Moment(monthNum, 'M').format('MMMM');
+Month.propTypes = {
+  monthNum: PropTypes.number.isRequired,
+  yearNum: PropTypes.number.isRequired,
+  data: PropTypes.objectOf(PropTypes.object).isRequired,
 
-//   return (
-//     <>
-//     <div>
-//       {formattedMonth}
-//       {' '}
-//       {yearNum}
-//     <table>
-//       <thead>
-//         <tr>
-//           <th>Su</th>
-//           <th>Mo</th>
-//           <th>Tu</th>
-//           <th>We</th>
-//           <th>Th</th>
-//           <th>Fr</th>
-//           <th>Sa</th>
-//         </tr>
-//       </thead>
-//       <tbody>
-//       </tbody>
-//       </table>
-//     </div>
-//     </>
-//   )
-// }
-
-// Month.propTypes = {
-//   data: PropTypes.object.isRequired,
-//   monthNum: PropTypes.number.isRequired,
-//   yearNum: PropTypes.number.isRequired,
-// };
+};
 
 export default Month;
