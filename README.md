@@ -29,7 +29,7 @@
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
-- etc
+- Eslint 7.3.1
 
 ## Development
 
@@ -39,5 +39,4 @@ From within the root directory:
 
 ```sh
 npm install
-(make sure eslint is v7.3.1)
 ```
