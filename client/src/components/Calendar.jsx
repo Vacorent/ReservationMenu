@@ -42,6 +42,12 @@ class Calendar extends React.Component {
               <Month data={calendar[nextMonth]} monthNum={nextMonth} yearNum={nextMonthYear} />
             </td>
           </tr>
+          <tr >
+            <td colSpan="2" className="calendarButtons">
+              <button>Clear dates</button>
+              <button>Close</button>
+            </td>
+            </tr>
         </tbody>
       )
     }

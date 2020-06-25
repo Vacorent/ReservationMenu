@@ -216,14 +216,18 @@ button.guestButton:focus {
 .dropdownCalendar {
   width: 800px;
   height: 600px;
-  background-color: grey;
-  border-top: 1px solid black;
+  background-color: white;
+  border-radius: 25px;
   display: block;
   position: absolute;
-  box-shadow: 10px 10px 10px -10px rgba(0,0,0,0.2), 10px 10px 10px -10px rgba(0,0,0,0.2), -10px 10px 10px -10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
   z-index: 1;
   font-weight: 600;
   font-size: 1.2em;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.calendarButtons {
+  text-align: right;
 }

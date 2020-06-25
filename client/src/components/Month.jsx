@@ -5,9 +5,31 @@ import Moment from 'moment';
 
 
 const Month = ({ data, monthNum, yearNum }) => {
-  console.log('data passed to month is ', data['26'].cost)
+  const formattedMonth = Moment(monthNum, 'M').format('MMMM');
+
   return (
-  <div>{monthNum} and also {yearNum}</div>
+    <>
+    <div>
+      {formattedMonth}
+      {' '}
+      {yearNum}
+    <table>
+      <thead>
+        <tr>
+          <th>Su</th>
+          <th>Mo</th>
+          <th>Tu</th>
+          <th>We</th>
+          <th>Th</th>
+          <th>Fr</th>
+          <th>Sa</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      </table>
+    </div>
+    </>
   )
 }
 
