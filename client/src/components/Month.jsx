@@ -9,6 +9,10 @@ class Month extends React.Component {
     };
   }
 
+  renderView() {
+
+  }
+
   render() {
     const { data, monthNum, yearNum } = this.props;
     const formattedMonth = Moment(monthNum, 'M').format('MMMM');
