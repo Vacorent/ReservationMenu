@@ -5,12 +5,12 @@ const Reservation = require('./Reservation.js');
 
 const today = moment();
 
-const cost = 175;
+const cost = 200;
 const curr = 'USD';
 const weekendMultipler = 1.2;
 
 const sampleCalendarDates = [];
-for (let i = 0; i < 365; i += 1) {
+for (let i = 0; i < 330; i += 1) {
   const nextDay = today.add(1, 'days');
   const dayOfWeek = nextDay.day();
   const isWeekend = (dayOfWeek === 6) || (dayOfWeek === 0);
@@ -21,9 +21,9 @@ for (let i = 0; i < 365; i += 1) {
   });
 }
 
-const rating = 4.52; /* Math.floor(Math.random()*5 + 1).toFix(1); */
-const numberOfReviews = 563;
-const capacity = 6;
+const rating = 3.78; /* Math.floor(Math.random()*5 + 1).toFix(1); */
+const numberOfReviews = 823;
+const capacity = 8;
 const sampleReservation = {
   _id: 0,
   reviewAverage: rating,
