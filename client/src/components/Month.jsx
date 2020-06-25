@@ -10,10 +10,10 @@ class Month extends React.Component {
   }
 
   renderView() {
-    const { monthNum, yearNum } = this.props;
+    const { monthNum, yearNum, data } = this.props;
     const startDayOfWeek = Moment([yearNum, monthNum]).startOf('month').day();
     const daysInMonth = Moment([yearNum, monthNum]).daysInMonth();
-    let calRows = [];
+    const calRows = [];
     let currRow = [];
     let date = 1;
     let dayCounter = startDayOfWeek;
@@ -45,23 +45,25 @@ class Month extends React.Component {
       date += 1;
     }
 
-    let calEntries = calRows.map((calRow, index) => {
-      let rowEntries = calRow.map((day, index) => {
-        return <td key={index}>{day}</td>
-      })
+    const calEntries = calRows.map((calRow, index) => {
+      const rowEntries = calRow.map((day, index) => {
+        if (data[day] === undefined || data[day].isBooked === true) {
+          return <td key={index}><button className="invalidDate" disabled>{day}</button></td>;
+        }
+        return <td key={index}><button className="validDate">{day}</button></td>;
+      });
       return (
         <tr key={index}>
           {rowEntries}
         </tr>
-      )
-    })
+      );
+    });
 
     return (
       <>
-       {calEntries}
+        {calEntries}
       </>
-    )
-
+    );
   }
 
   render() {
@@ -88,7 +90,7 @@ class Month extends React.Component {
           </table>
         </div>
       </>
-    )
+    );
   }
 }
 

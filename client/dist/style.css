@@ -231,3 +231,32 @@ button.guestButton:focus {
 .calendarButtons {
   text-align: right;
 }
+
+.invalidDate {
+  text-decoration: line-through;
+  font-weight: 100;
+  color: gray;
+  background-color: white;
+  border: none;
+}
+
+.validDate {
+  font-weight: 700;
+  color: black;
+  background-color: white;
+  border: 1px solid transparent;
+}
+
+button.validDate:hover {
+  border-radius: 50%;
+  border-color: black;
+  border-width: 1px;
+}
+
+button.validDate:focus {
+  outline-width: 0;
+  border-color: white;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+}
