@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './../css/Guests.css';
 
 class Guests extends React.Component {
   constructor(props) {
@@ -64,56 +65,57 @@ class Guests extends React.Component {
     const { capacity } = this.props;
     if (isDropdown) {
       return (
-        <tbody className="dropdownGuests">
-          <tr className="guestRow">
+        <tbody className={styles.dropdownGuests}>
+          <tr className={styles.guestRow}>
             <td>
               <div>Adults</div>
             </td>
-            <td className="guestButtonsTD">
-              <button className="guestButton" type="button" onClick={() => { this.changeGuestCount('adult', 0); }}>-</button>
+            <td className={styles.guestButtonsTD}>
+              <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('adult', 0); }}>-</button>
               {' '}
               {adultCount}
               {' '}
-              <button className="guestButton" type="button" onClick={() => { this.changeGuestCount('adult', 1); }}>+</button>
+              <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('adult', 1); }}>+</button>
             </td>
           </tr>
-          <tr className="guestRow">
+          <tr className={styles.guestRow}>
             <td>
               <div>Children</div>
-              <div className="guestStatic" type="button">Ages 2 - 12</div>
+              <div className={styles.guestStatic} type="button">Ages 2 - 12</div>
             </td>
-            <td className="guestButtonsTD">
-              <button className="guestButton" type="button" onClick={() => { this.changeGuestCount('child', 0); }}>-</button>
+            <td className={styles.guestButtonsTD}>
+              <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('child', 0); }}>-</button>
               {' '}
               {childCount}
               {' '}
-              <button className="guestButton" type="button" onClick={() => { this.changeGuestCount('child', 1); }}>+</button>
+              <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('child', 1); }}>+</button>
             </td>
           </tr>
-          <tr className="guestRow">
+          <tr className={styles.guestRow}>
             <td>
               <div>Infants</div>
-              <div className="guestStatic">Under 2</div>
+              <div className={styles.guestStatic}>Under 2</div>
             </td>
-            <td className="guestButtonsTD">
-              <button className="guestButton" type="button" onClick={() => { this.changeGuestCount('infant', 0); }}>-</button>
+            <td className={styles.guestButtonsTD}>
+              <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('infant', 0); }}>-</button>
               {' '}
               {infantCount}
               {' '}
-              <button className="guestButton" type="button" onClick={() => { this.changeGuestCount('infant', 1); }}>+</button>
+              <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('infant', 1); }}>+</button>
             </td>
+
           </tr>
-          <tr className="guestRow">
-            <td colSpan="2" className="maxCapacityText">
+          <tr className={styles.guestRow}>
+            <td colSpan="2" className={styles.maxCapacityText}>
               {' '}
               {capacity}
               {' '}
               guests maximum. Infants don&apos;t count toward the number of guests.
             </td>
           </tr>
-          <tr className="guestRow">
-            <td colSpan="2" className="guestButtonsTD">
-              <button className="closeButton" onClick={this.dropdownClick} type="button">Close</button>
+          <tr className={styles.guestRow}>
+            <td colSpan="2" className={styles.guestButtonsTD}>
+              <button className={styles.closeButton} onClick={this.dropdownClick} type="button">Close</button>
             </td>
           </tr>
         </tbody>
@@ -125,9 +127,9 @@ class Guests extends React.Component {
   renderArrow() {
     const { isDropdown } = this.state;
     if (isDropdown) {
-      return <div className="uparrow">&#8963;</div>;
+      return <div className={styles.uparrow}>&#8963;</div>;
     }
-    return <div className="downarrow">&#8964;</div>;
+    return <div className={styles.downarrow}>&#8964;</div>;
   }
 
   render() {
@@ -138,9 +140,9 @@ class Guests extends React.Component {
       <>
         <tbody>
           <tr>
-            <td colSpan="2" className="guests" onClick={this.dropdownClick} onKeyDown={this.dropdownClick} role="presentation">
-              <div className="guestText1">GUESTS</div>
-              <div className="guestText2">
+            <td colSpan="2" className={styles.guests} onClick={this.dropdownClick} onKeyDown={this.dropdownClick} role="presentation">
+              <div className={styles.guestText1}>GUESTS</div>
+              <div className={styles.guestText2}>
                 {totalCount}
                 {' '}
                 {guestText}

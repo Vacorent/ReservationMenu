@@ -2,8 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
+import styles from './css/index.css';
 import Header from './components/Header';
 import Calendar from './components/Calendar';
+
+console.log(styles)
 
 class App extends React.Component {
   constructor() {
@@ -48,11 +51,11 @@ class App extends React.Component {
     let { rating } = this.state;
     rating = rating.toFixed(2);
     return (
-      <div id="root">
+      <div className={styles.root}>
         <Header price={price} rating={rating} reviewCount={reviewCount} />
         <br />
         <Calendar capacity={capacity} calendar={calendar} />
-        <button type="submit" className="availButton">Check availability</button>
+        <button type="submit" className={styles.availButton}>Check availability</button>
       </div>
     );
   }

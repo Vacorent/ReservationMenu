@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Moment from 'moment';
 import Guests from './Guests';
 import Month from './Month';
+import styles from './../css/Calendar.css';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -83,11 +84,11 @@ class Calendar extends React.Component {
     const textNextMonth = Moment(nextMonthNum + 1, 'M').format('MMMM');
     if (isDropdown) {
       return (
-        <tbody className="dropdownCalendar">
+        <tbody className={styles.dropdownCalendar}>
           <tr>
-            <td className="calHeader">
-              <button onClick={this.prevMonthClick} type="button" className="prevMonthButton">{'<'}</button>
-              <div className="calHeaderText">
+            <td className={styles.calHeader}>
+              <button onClick={this.prevMonthClick} type="button" className={styles.prevMonthButton}>{'<'}</button>
+              <div className={styles.calHeaderText}>
                 {textCurrMonth}
                 {' '}
                 {currentMonthYear}
@@ -99,9 +100,9 @@ class Calendar extends React.Component {
                 setDateClick={this.setDateClick}
               />
             </td>
-            <td className="calHeader">
-              <button onClick={this.nextMonthClick} type="button" className="nextMonthButton">{'>'}</button>
-              <div className="calHeaderText">
+            <td className={styles.calHeader}>
+              <button onClick={this.nextMonthClick} type="button" className={styles.nextMonthButton}>{'>'}</button>
+              <div className={styles.calHeaderText}>
                 {textNextMonth}
                 {' '}
                 {nextMonthYear}
@@ -115,9 +116,9 @@ class Calendar extends React.Component {
             </td>
           </tr>
           <tr>
-            <td colSpan="2" className="calendarButtons">
-              <button type="button" onClick={this.clearDateClick} className="clearDates">Clear dates</button>
-              <button type="button" onClick={this.dropdownClick} className="closeCal">Close</button>
+            <td colSpan="2" className={styles.calendarButtons}>
+              <button type="button" onClick={this.clearDateClick} className={styles.clearDates}>Clear dates</button>
+              <button type="button" onClick={this.dropdownClick} className={styles.closeCal}>Close</button>
             </td>
           </tr>
         </tbody>
@@ -145,16 +146,16 @@ class Calendar extends React.Component {
       }
     }
     return (
-      <table className="table">
+      <table className={styles.table}>
         <tbody>
           <tr>
-            <td className="checkin" role="presentation" onClick={this.dropdownClick} onKeyDown={this.dropdownClick}>
-              <div className="staticText">CHECK-IN</div>
-              <div className="dynamicText">{startDate}</div>
+            <td className={styles.checkin} role="presentation" onClick={this.dropdownClick} onKeyDown={this.dropdownClick}>
+              <div className={styles.staticText}>CHECK-IN</div>
+              <div className={styles.dynamicText}>{startDate}</div>
             </td>
-            <td className="checkout" role="presentation" onClick={this.dropdownClick} onKeyDown={this.dropdownClick}>
-              <div className="staticText">CHECKOUT</div>
-              <div className="dynamicText">{endDate}</div>
+            <td className={styles.checkout} role="presentation" onClick={this.dropdownClick} onKeyDown={this.dropdownClick}>
+              <div className={styles.staticText}>CHECKOUT</div>
+              <div className={styles.dynamicText}>{endDate}</div>
             </td>
           </tr>
         </tbody>

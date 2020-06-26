@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
+import styles from './../css/Month.css';
 
 class Month extends React.Component {
   constructor(props) {
@@ -59,9 +60,9 @@ class Month extends React.Component {
         dayCount += 1;
         const dateText = day !== '' ? Moment([yearNum, monthNum, day]).format('MM/DD/YYYY') : '';
         if (data[day] === undefined || data[day].isBooked === true) {
-          return <td key={dayCount}><button className="invalidDate" type="button" disabled>{day}</button></td>;
+          return <td key={dayCount}><button className={styles.invalidDate} type="button" disabled>{day}</button></td>;
         }
-        return <td key={dayCount}><button className="validDate" type="button" onClick={(() => this.handleDateClick(dateText))}>{day}</button></td>;
+        return <td key={dayCount}><button className={styles.validDate} type="button" onClick={(() => this.handleDateClick(dateText))}>{day}</button></td>;
       });
       return (
         <tr key={rowCount}>
@@ -81,16 +82,16 @@ class Month extends React.Component {
     return (
       <>
         <div>
-          <table className="monthCalendar">
+          <table className={styles.monthCalendar}>
             <thead>
               <tr>
-                <th className="daysOfWeek">Su</th>
-                <th className="daysOfWeek">Mo</th>
-                <th className="daysOfWeek">Tu</th>
-                <th className="daysOfWeek">We</th>
-                <th className="daysOfWeek">Th</th>
-                <th className="daysOfWeek">Fr</th>
-                <th className="daysOfWeek">Sa</th>
+                <th className={styles.daysOfWeek}>Su</th>
+                <th className={styles.daysOfWeek}>Mo</th>
+                <th className={styles.daysOfWeek}>Tu</th>
+                <th className={styles.daysOfWeek}>We</th>
+                <th className={styles.daysOfWeek}>Th</th>
+                <th className={styles.daysOfWeek}>Fr</th>
+                <th className={styles.daysOfWeek}>Sa</th>
               </tr>
             </thead>
             <tbody>

@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './../css/Header.css';
 
 const Header = ({ rating, price, reviewCount }) => (
   <div>
-    <div className="price">
+    <div className={styles.price}>
       <b>
         $
         {price}
       </b>
-      <span className="ptext"> / night </span>
-      <span className="star" role="img" aria-labelledby="star">&#11088;</span>
-      <span className="rating">
+      <span className={styles.ptext}> / night </span>
+      <span className={styles.star} role="img" aria-labelledby="star">&#11088;</span>
+      <span className={styles.rating}>
         {rating}
         {' '}
         (
