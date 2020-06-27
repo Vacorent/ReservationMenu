@@ -50,10 +50,12 @@ class Calendar extends React.Component {
   nextMonthClick(e) {
     console.log('nextmonth clicked');
     const { currentMonth, currentMonthYear } = this.state;
-    this.setState({
-      currentMonth: currentMonth === 11 ? 0 : currentMonth + 1,
-      currentMonthYear: currentMonth === 11 ? currentMonthYear + 1 : currentMonthYear,
-    });
+    if (currentMonth !== (Moment().month() - 2) || currentMonthYear !== (Moment().year() + 1)) {
+      this.setState({
+        currentMonth: currentMonth === 11 ? 0 : currentMonth + 1,
+        currentMonthYear: currentMonth === 11 ? currentMonthYear + 1 : currentMonthYear,
+      });
+    }
     e.preventDefault();
   }
 
@@ -74,6 +76,26 @@ class Calendar extends React.Component {
     e.preventDefault();
   }
 
+  renderMonthBack() {
+    const { currentMonth, currentMonthYear } = this.state;
+    if (currentMonth === Moment().month() && currentMonthYear === Moment().year()) {
+      return (
+        <button onClick={this.prevMonthClick} type="button" className={styles.notAllowed}>{'<'}</button>
+      )
+    }
+    return <button onClick={this.prevMonthClick} type="button" className={styles.prevMonthButton}>{'<'}</button>
+  }
+
+  renderMonthNext() {
+    const { currentMonth, currentMonthYear } = this.state;
+    if (currentMonth === (Moment().month() - 2) && currentMonthYear === (Moment().year() + 1)) {
+      return (
+        <button onClick={this.nextMonthClick} type="button" className={styles.notAllowedNext}>{'>'}</button>
+      )
+    }
+    return <button onClick={this.nextMonthClick} type="button" className={styles.nextMonthButton}>{'>'}</button>
+  }
+
   renderView() {
     const { isDropdown, currentMonth, currentMonthYear } = this.state;
     const { calendar } = this.props;
@@ -87,7 +109,7 @@ class Calendar extends React.Component {
         <tbody className={styles.dropdownCalendar}>
           <tr>
             <td className={styles.calHeader}>
-              <button onClick={this.prevMonthClick} type="button" className={styles.prevMonthButton}>{'<'}</button>
+              {this.renderMonthBack()}
               <div className={styles.calHeaderText}>
                 {textCurrMonth}
                 {' '}
@@ -101,7 +123,7 @@ class Calendar extends React.Component {
               />
             </td>
             <td className={styles.calHeader}>
-              <button onClick={this.nextMonthClick} type="button" className={styles.nextMonthButton}>{'>'}</button>
+              {this.renderMonthNext()}
               <div className={styles.calHeaderText}>
                 {textNextMonth}
                 {' '}

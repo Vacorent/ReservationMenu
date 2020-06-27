@@ -38,6 +38,22 @@ td {
   top: 10px;
 }
 
+.notAllowed {
+  cursor: not-allowed;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  float:left;
+}
+
+.notAllowedNext {
+  cursor: not-allowed;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  float:right;
+}
+
 .prevMonthButton {
   background-color: white;
   border-radius: 50%;
