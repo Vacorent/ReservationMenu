@@ -31,3 +31,7 @@
 button:focus {
   outline-width: 0;
 }
+
+button {
+  cursor: pointer;
+}

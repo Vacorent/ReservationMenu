@@ -94,4 +94,5 @@ button.guestButton:hover {
 .guests {
   height: 50px;
   vertical-align: top;
+  cursor: pointer;
 }
