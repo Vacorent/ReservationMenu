@@ -12,7 +12,7 @@
 .availButton {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  background-color: #cc0052;
+  background: linear-gradient(to left, #d50066, #e3114e);
   color: white;
   padding: 15px 15px;
   text-align: center;
@@ -25,7 +25,11 @@
 }
 
 .availButton:hover {
-  background-color: #cc3399;
+  background-color: #d50066;
+  /*background-position: 100px;*/
+  transition: background 2s ease-in;
+  background: radial-gradient(circle 80px, #ec215b, #d50066);
+
 }
 
 button:focus {

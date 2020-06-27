@@ -6,8 +6,6 @@ import styles from './css/index.css';
 import Header from './components/Header';
 import Calendar from './components/Calendar';
 
-console.log(styles)
-
 class App extends React.Component {
   constructor() {
     super();
@@ -51,12 +49,14 @@ class App extends React.Component {
     let { rating } = this.state;
     rating = rating.toFixed(2);
     return (
+      <>
       <div className={styles.root}>
         <Header price={price} rating={rating} reviewCount={reviewCount} />
         <br />
         <Calendar capacity={capacity} calendar={calendar} />
         <button type="submit" className={styles.availButton}>Check availability</button>
       </div>
+      </>
     );
   }
 }
