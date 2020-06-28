@@ -11,8 +11,6 @@ class Calendar extends React.Component {
     this.state = {
       currentMonth: Moment().month(),
       currentMonthYear: Moment().year(),
-      startDate: '',
-      endDate: '',
       isDropdown: false,
     };
     this.dropdownClick = this.dropdownClick.bind(this);
@@ -23,15 +21,14 @@ class Calendar extends React.Component {
   }
 
   setDateClick(date) {
-    const { startDate, endDate } = this.state;
+    console.log('date in set date is ', date)
+    const { startDate, endDate, handleStartChange, handleEndChange } = this.props;
+    console.log('start date is ', startDate)
     if (startDate === '') {
-      this.setState({
-        startDate: date,
-      });
+      handleStartChange(date);
     } else if (endDate === '') {
-      this.setState({
-        endDate: date,
-      });
+      handleEndChange(date);
+      this.dropdownClick();
     }
   }
 
@@ -65,14 +62,16 @@ class Calendar extends React.Component {
     this.setState({
       isDropdown: !isDropdown,
     });
-    e.preventDefault();
   }
 
   clearDateClick(e) {
-    this.setState({
-      startDate: '',
-      endDate: '',
-    });
+    const { handleStartChange, handleEndChange } = this.props;
+    handleStartChange('');
+    handleEndChange('');
+    // this.setState({
+    //   startDate: '',
+    //   endDate: '',
+    // });
     e.preventDefault();
   }
 
@@ -150,8 +149,8 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const { capacity } = this.props;
-    let { startDate, endDate } = this.state;
+    const { capacity, adultCount, childCount, infantCount, handleGuestChange } = this.props;
+    let { startDate, endDate } = this.props;
     const { isDropdown } = this.state;
     if (!startDate) {
       if (isDropdown) {
@@ -182,7 +181,7 @@ class Calendar extends React.Component {
           </tr>
         </tbody>
         {this.renderView()}
-        <Guests capacity={capacity} />
+        <Guests capacity={capacity} adultCount={adultCount} childCount={childCount} infantCount={infantCount} handleGuestChange={handleGuestChange} />
       </table>
     );
   }

@@ -28,8 +28,12 @@
   background-color: #d50066;
   /*background-position: 100px;*/
   transition: background 2s ease-in;
-  background: radial-gradient(circle 80px, #ec215b, #d50066);
+  background: radial-gradient(circle 150px, #ec215b, #d50066);
 
+}
+
+.availButton:active {
+  transform: scale(0.9);
 }
 
 button:focus {

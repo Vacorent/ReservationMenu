@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import Moment from 'moment';
 
 import styles from './css/index.css';
 import Header from './components/Header';
@@ -15,7 +16,16 @@ class App extends React.Component {
       reviewCount: 0,
       capacity: 0,
       calendar: {},
+      startDate: '',
+      endDate: '',
+      adultCount: 1,
+      childCount: 0,
+      infantCount: 0,
+      guestCountMultiplier: 1,
     };
+    this.handleStartChange = this.handleStartChange.bind(this);
+    this.handleEndChange = this.handleEndChange.bind(this);
+    this.handleGuestChange = this.handleGuestChange.bind(this);
   }
 
   componentDidMount() {
@@ -42,9 +52,95 @@ class App extends React.Component {
     });
   }
 
+  handleStartChange(date) {
+    const { calendar } = this.state;
+    let { price } = this.state;
+    let month, day;
+    if (date !== '') {
+      month = parseInt(date.slice(0,2));
+      day = parseInt(date.slice(3,5));
+      price = calendar[month][day]['cost'];
+    }
+    this.setState({
+      startDate: date,
+      price: price,
+    })
+  }
+
+  handleEndChange(date) {
+    const { calendar, startDate } = this.state;
+    let { price } = this.state;
+    let month, day, startMonth, startDay;
+    if (date !== '') {
+      price = 0;
+      const startMoment = Moment(startDate, "MM/DD/YYYY");
+      const endMoment = Moment(date, "MM/DD/YYYY").add(1, 'days');
+      let currMonth, currDate;
+      while (startMoment.isBefore(endMoment)) {
+        currMonth = startMoment.month();
+        currDate = startMoment.date();
+        price += calendar[currMonth][currDate]['cost'];
+        startMoment.add(1, 'days');
+      }
+    } else if (date === '') {
+      price = calendar['0']['1'].cost;
+    }
+    this.setState({
+      endDate: date,
+      price: price,
+    })
+  }
+
+  handleGuestChange(type, inc) {
+    const { adultCount, childCount, infantCount } = this.state;
+    if (type === 'adult') {
+      if (inc === 1) {
+        this.setState({
+          adultCount: adultCount + 1,
+        });
+      } else {
+        this.setState({
+          adultCount: adultCount - 1,
+        });
+      }
+    } else if (type === 'child') {
+      if (inc === 1) {
+        this.setState({
+          childCount: childCount + 1,
+        });
+      } else {
+        this.setState({
+          childCount: childCount - 1,
+        });
+      }
+    } else if (type === 'infant') {
+      if (inc === 1) {
+        this.setState({
+          infantCount: infantCount + 1,
+        });
+      } else {
+        this.setState({
+          infantCount: infantCount - 1,
+        });
+      }
+    }
+  }
+
+  renderAvailButton() {
+    const { startDate, endDate } = this.state;
+    if (startDate && endDate) {
+      return <button type="submit" className={styles.availButton}>Reserve</button>
+    }
+    return <button type="submit" className={styles.availButton}>Check availability</button>
+  }
+
+  renderCosts() {
+
+  }
+
   render() {
     const {
-      price, reviewCount, capacity, calendar,
+      price, reviewCount, capacity, calendar, startDate, endDate, adultCount, childCount, infantCount
     } = this.state;
     let { rating } = this.state;
     rating = rating.toFixed(2);
@@ -53,8 +149,9 @@ class App extends React.Component {
       <div className={styles.root}>
         <Header price={price} rating={rating} reviewCount={reviewCount} />
         <br />
-        <Calendar capacity={capacity} calendar={calendar} />
-        <button type="submit" className={styles.availButton}>Check availability</button>
+        <Calendar capacity={capacity} calendar={calendar} handleStartChange={this.handleStartChange} handleEndChange={this.handleEndChange} startDate={startDate} endDate={endDate} adultCount={adultCount} childCount={childCount} infantCount={infantCount} handleGuestChange={this.handleGuestChange} />
+        {this.renderAvailButton()}
+        {this.renderCosts()}
       </div>
       </>
     );

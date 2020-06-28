@@ -6,12 +6,10 @@ class Guests extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      adultCount: 1,
-      childCount: 0,
-      infantCount: 0,
       isDropdown: false,
     };
     this.dropdownClick = this.dropdownClick.bind(this);
+    this.changeGuestCount = this.changeGuestCount.bind(this);
   }
 
   dropdownClick(e) {
@@ -23,45 +21,48 @@ class Guests extends React.Component {
     e.preventDefault();
   }
 
+  // changeGuestCount(type, inc) {
+  //   const { adultCount, childCount, infantCount } = this.state;
+  //   if (type === 'adult') {
+  //     if (inc === 1) {
+  //       this.setState({
+  //         adultCount: adultCount + 1,
+  //       });
+  //     } else {
+  //       this.setState({
+  //         adultCount: adultCount - 1,
+  //       });
+  //     }
+  //   } else if (type === 'child') {
+  //     if (inc === 1) {
+  //       this.setState({
+  //         childCount: childCount + 1,
+  //       });
+  //     } else {
+  //       this.setState({
+  //         childCount: childCount - 1,
+  //       });
+  //     }
+  //   } else if (type === 'infant') {
+  //     if (inc === 1) {
+  //       this.setState({
+  //         infantCount: infantCount + 1,
+  //       });
+  //     } else {
+  //       this.setState({
+  //         infantCount: infantCount - 1,
+  //       });
+  //     }
+  //   }
+  // }
   changeGuestCount(type, inc) {
-    const { adultCount, childCount, infantCount } = this.state;
-    if (type === 'adult') {
-      if (inc === 1) {
-        this.setState({
-          adultCount: adultCount + 1,
-        });
-      } else {
-        this.setState({
-          adultCount: adultCount - 1,
-        });
-      }
-    } else if (type === 'child') {
-      if (inc === 1) {
-        this.setState({
-          childCount: childCount + 1,
-        });
-      } else {
-        this.setState({
-          childCount: childCount - 1,
-        });
-      }
-    } else if (type === 'infant') {
-      if (inc === 1) {
-        this.setState({
-          infantCount: infantCount + 1,
-        });
-      } else {
-        this.setState({
-          infantCount: infantCount - 1,
-        });
-      }
-    }
+    const { handleGuestChange } = this.props;
+    handleGuestChange(type, inc);
   }
 
   renderView() {
-    const {
-      isDropdown, adultCount, childCount, infantCount,
-    } = this.state;
+    const { isDropdown } = this.state;
+    const { adultCount, childCount, infantCount } = this.props;
     const { capacity } = this.props;
     if (isDropdown) {
       return (
@@ -132,21 +133,41 @@ class Guests extends React.Component {
     return <div className={styles.downarrow}>&#8964;</div>;
   }
 
-  render() {
-    const { adultCount, childCount } = this.state;
+  renderGuestText() {
+    const { infantCount, adultCount, childCount } = this.props;
     const totalCount = adultCount + childCount;
     const guestText = totalCount === 1 ? 'guest' : 'guests';
+    const infantText = infantCount === 1 ? 'infant' : 'infants';
+    if (infantCount === 0) {
+      return (
+        <div className={styles.guestText2}>
+          {totalCount}
+          {' '}
+          {guestText}
+        </div>
+      )
+    }
+    return (
+      <div className={styles.guestText2}>
+        {totalCount}
+        {' '}
+        {guestText}
+        {', '}
+        {infantCount}
+        {' '}
+        {infantText}
+      </div>
+    )
+  }
+
+  render() {
     return (
       <>
         <tbody>
           <tr>
             <td colSpan="2" className={styles.guests} onClick={this.dropdownClick} onKeyDown={this.dropdownClick} role="presentation">
               <div className={styles.guestText1}>GUESTS</div>
-              <div className={styles.guestText2}>
-                {totalCount}
-                {' '}
-                {guestText}
-              </div>
+              {this.renderGuestText()}
               {this.renderArrow()}
             </td>
           </tr>
