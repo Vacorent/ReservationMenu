@@ -92,25 +92,30 @@ class App extends React.Component {
   }
 
   handleGuestChange(type, inc) {
-    const { adultCount, childCount, infantCount } = this.state;
+    const { adultCount, childCount, infantCount, guestCountMultiplier } = this.state;
+    const totalCount = adultCount + childCount;
     if (type === 'adult') {
       if (inc === 1) {
         this.setState({
           adultCount: adultCount + 1,
+          guestCountMultiplier: guestCountMultiplier*1.05,
         });
       } else {
         this.setState({
           adultCount: adultCount - 1,
+          guestCountMultiplier: guestCountMultiplier/1.05,
         });
       }
     } else if (type === 'child') {
       if (inc === 1) {
         this.setState({
           childCount: childCount + 1,
+          guestCountMultiplier: guestCountMultiplier*1.05,
         });
       } else {
         this.setState({
           childCount: childCount - 1,
+          guestCountMultiplier: guestCountMultiplier/1.05,
         });
       }
     } else if (type === 'infant') {
@@ -140,8 +145,10 @@ class App extends React.Component {
 
   render() {
     const {
-      price, reviewCount, capacity, calendar, startDate, endDate, adultCount, childCount, infantCount
+      reviewCount, capacity, calendar, startDate, endDate, adultCount, childCount, infantCount, guestCountMultiplier,
     } = this.state;
+    let { price } = this.state;
+    price = parseInt((price*guestCountMultiplier).toFixed(0));
     let { rating } = this.state;
     rating = rating.toFixed(2);
     return (

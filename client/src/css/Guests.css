@@ -34,6 +34,22 @@ button.guestButton {
   margin-right: 10px;
 }
 
+button.guestButtonDis {
+  cursor: not-allowed;
+  transform: scale(1.75,1.75);
+  width: 13%;
+  margin: 5px;
+  border-radius: 50%;
+  border-width: 1px;
+  border-color: rgba(220, 220, 220, 0.7);
+  color: rgba(220, 220, 220, 0.7);
+  border-style: solid;
+  background-color: white;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 button.guestButton:hover {
   border-color: black;
 }
