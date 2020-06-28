@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Moment from 'moment';
 import Guests from './Guests';
 import Month from './Month';
+import styles from './../css/Calendar.css';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -10,8 +11,6 @@ class Calendar extends React.Component {
     this.state = {
       currentMonth: Moment().month(),
       currentMonthYear: Moment().year(),
-      startDate: '',
-      endDate: '',
       isDropdown: false,
     };
     this.dropdownClick = this.dropdownClick.bind(this);
@@ -22,15 +21,14 @@ class Calendar extends React.Component {
   }
 
   setDateClick(date) {
-    const { startDate, endDate } = this.state;
+    console.log('date in set date is ', date)
+    const { startDate, endDate, handleStartChange, handleEndChange } = this.props;
+    console.log('start date is ', startDate)
     if (startDate === '') {
-      this.setState({
-        startDate: date,
-      });
+      handleStartChange(date);
     } else if (endDate === '') {
-      this.setState({
-        endDate: date,
-      });
+      handleEndChange(date);
+      this.dropdownClick();
     }
   }
 
@@ -49,10 +47,12 @@ class Calendar extends React.Component {
   nextMonthClick(e) {
     console.log('nextmonth clicked');
     const { currentMonth, currentMonthYear } = this.state;
-    this.setState({
-      currentMonth: currentMonth === 11 ? 0 : currentMonth + 1,
-      currentMonthYear: currentMonth === 11 ? currentMonthYear + 1 : currentMonthYear,
-    });
+    if (currentMonth !== (Moment().month() - 2) || currentMonthYear !== (Moment().year() + 1)) {
+      this.setState({
+        currentMonth: currentMonth === 11 ? 0 : currentMonth + 1,
+        currentMonthYear: currentMonth === 11 ? currentMonthYear + 1 : currentMonthYear,
+      });
+    }
     e.preventDefault();
   }
 
@@ -62,15 +62,37 @@ class Calendar extends React.Component {
     this.setState({
       isDropdown: !isDropdown,
     });
-    e.preventDefault();
   }
 
   clearDateClick(e) {
-    this.setState({
-      startDate: '',
-      endDate: '',
-    });
+    const { handleStartChange, handleEndChange } = this.props;
+    handleStartChange('');
+    handleEndChange('');
+    // this.setState({
+    //   startDate: '',
+    //   endDate: '',
+    // });
     e.preventDefault();
+  }
+
+  renderMonthBack() {
+    const { currentMonth, currentMonthYear } = this.state;
+    if (currentMonth === Moment().month() && currentMonthYear === Moment().year()) {
+      return (
+        <button onClick={this.prevMonthClick} type="button" className={styles.notAllowed}>{'<'}</button>
+      )
+    }
+    return <button onClick={this.prevMonthClick} type="button" className={styles.prevMonthButton}>{'<'}</button>
+  }
+
+  renderMonthNext() {
+    const { currentMonth, currentMonthYear } = this.state;
+    if (currentMonth === (Moment().month() - 2) && currentMonthYear === (Moment().year() + 1)) {
+      return (
+        <button onClick={this.nextMonthClick} type="button" className={styles.notAllowedNext}>{'>'}</button>
+      )
+    }
+    return <button onClick={this.nextMonthClick} type="button" className={styles.nextMonthButton}>{'>'}</button>
   }
 
   renderView() {
@@ -83,11 +105,11 @@ class Calendar extends React.Component {
     const textNextMonth = Moment(nextMonthNum + 1, 'M').format('MMMM');
     if (isDropdown) {
       return (
-        <tbody className="dropdownCalendar">
+        <tbody className={styles.dropdownCalendar}>
           <tr>
-            <td className="calHeader">
-              <button onClick={this.prevMonthClick} type="button" className="prevMonthButton">{'<'}</button>
-              <div className="calHeaderText">
+            <td className={styles.calHeader}>
+              {this.renderMonthBack()}
+              <div className={styles.calHeaderText}>
                 {textCurrMonth}
                 {' '}
                 {currentMonthYear}
@@ -99,9 +121,9 @@ class Calendar extends React.Component {
                 setDateClick={this.setDateClick}
               />
             </td>
-            <td className="calHeader">
-              <button onClick={this.nextMonthClick} type="button" className="nextMonthButton">{'>'}</button>
-              <div className="calHeaderText">
+            <td className={styles.calHeader}>
+              {this.renderMonthNext()}
+              <div className={styles.calHeaderText}>
                 {textNextMonth}
                 {' '}
                 {nextMonthYear}
@@ -115,9 +137,9 @@ class Calendar extends React.Component {
             </td>
           </tr>
           <tr>
-            <td colSpan="2" className="calendarButtons">
-              <button type="button" onClick={this.clearDateClick} className="clearDates">Clear dates</button>
-              <button type="button" onClick={this.dropdownClick} className="closeCal">Close</button>
+            <td colSpan="2" className={styles.calendarButtons}>
+              <button type="button" onClick={this.clearDateClick} className={styles.clearDates}>Clear dates</button>
+              <button type="button" onClick={this.dropdownClick} className={styles.closeCal}>Close</button>
             </td>
           </tr>
         </tbody>
@@ -127,8 +149,8 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const { capacity } = this.props;
-    let { startDate, endDate } = this.state;
+    const { capacity, adultCount, childCount, infantCount, handleGuestChange } = this.props;
+    let { startDate, endDate } = this.props;
     const { isDropdown } = this.state;
     if (!startDate) {
       if (isDropdown) {
@@ -145,21 +167,21 @@ class Calendar extends React.Component {
       }
     }
     return (
-      <table className="table">
+      <table className={styles.table}>
         <tbody>
           <tr>
-            <td className="checkin" role="presentation" onClick={this.dropdownClick} onKeyDown={this.dropdownClick}>
-              <div className="staticText">CHECK-IN</div>
-              <div className="dynamicText">{startDate}</div>
+            <td className={styles.checkin} role="presentation" onClick={this.dropdownClick} onKeyDown={this.dropdownClick}>
+              <div className={styles.staticText}>CHECK-IN</div>
+              <div className={styles.dynamicText}>{startDate}</div>
             </td>
-            <td className="checkout" role="presentation" onClick={this.dropdownClick} onKeyDown={this.dropdownClick}>
-              <div className="staticText">CHECKOUT</div>
-              <div className="dynamicText">{endDate}</div>
+            <td className={styles.checkout} role="presentation" onClick={this.dropdownClick} onKeyDown={this.dropdownClick}>
+              <div className={styles.staticText}>CHECKOUT</div>
+              <div className={styles.dynamicText}>{endDate}</div>
             </td>
           </tr>
         </tbody>
         {this.renderView()}
-        <Guests capacity={capacity} />
+        <Guests capacity={capacity} adultCount={adultCount} childCount={childCount} infantCount={infantCount} handleGuestChange={handleGuestChange} />
       </table>
     );
   }

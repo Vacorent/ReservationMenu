@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;600;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;600;700&display=swap");
 
 #root {
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
@@ -6,9 +6,9 @@
   width: 340px;
   background-color: white;
   padding: 20px 20px 20px 20px;
-}
+} */
 
-.price {
+/* .price {
   font-family: 'Montserrat', sans-serif;
   margin-bottom: 0px;
   color: #2C3E50;
@@ -38,9 +38,9 @@
   margin-bottom: 0px;
   margin-left: 100px;
   font-size: 0.5em;
-}
+} */
 
-.availButton {
+/* .availButton {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   background-color: #cc0052;
@@ -53,13 +53,13 @@
   width: 340px;
   border-color: white;
   margin-top: 20px;
-}
+} */
 
-.availButton:hover {
+/* .availButton:hover {
   background-color: #cc3399;
-}
+} */
 
-table {
+/* table {
   border: 1px solid #999;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
@@ -70,9 +70,9 @@ table {
 
 td {
   text-align: left;
-}
+} */
 
-.checkin, .checkout {
+/* .checkin, .checkout {
   border-bottom: 1px solid #999;
   vertical-align: top;
   width: 162px;
@@ -80,9 +80,9 @@ td {
 }
 .checkin {
   border-right: 1px solid #999;
-}
+} */
 
-.guestText1 {
+/* .guestText1 {
   width: 90%;
   float: left;
   font-size: 0.7em;
@@ -104,10 +104,9 @@ td {
 .guests {
   height: 50px;
   vertical-align: top;
+} */
 
-}
-
-.staticText {
+/* .staticText {
   font-size: 0.6em;
   margin-top: 5px;
   margin-left: 5px;
@@ -120,7 +119,7 @@ td {
   margin-left: 5px;
   color: grey;
   font-weight: 400;
-}
+} */
 
 
 
@@ -131,7 +130,7 @@ td {
   color: black;
 }
 
-.downarrow {
+/* .downarrow {
   margin-left: 300px;
   margin-top: 10px;
   width: 10%;
@@ -143,9 +142,9 @@ td {
   margin-top: 27px;
   width: 10%;
   transform: scale(2.5,2.5);
-}
+} */
 
-.dropdownGuests {
+/* .dropdownGuests {
   border-top: 1px solid black;
   display: block;
   position: absolute;
@@ -157,32 +156,32 @@ td {
   font-size: 1.2em;
   padding-left: 15px;
   padding-right: 15px;
-}
+} */
 
-.guestRow {
+/* .guestRow {
   height: 60px;
-}
+} */
 
-.guestStatic {
+/* .guestStatic {
   font-weight: 300;
   font-size: .8em;
-}
+} */
 
-.maxCapacityText {
+/* .maxCapacityText {
   font-size: 0.7em;
   font-weight: 300;
   color: grey;
-}
+} */
 
-.guestButtonsTD {
+/* .guestButtonsTD {
   text-align: right;
-}
+} */
 
 .guestCounter {
   width: 10%;
 }
 
-button.guestButton {
+/* button.guestButton {
   transform: scale(1.75,1.75);
   width: 13%;
   margin: 5px;
@@ -198,18 +197,18 @@ button.guestButton {
 
 button.guestButton:hover {
   border-color: black;
-}
+} */
 
-.closeButton {
+/* .closeButton {
   font-family: 'Montserrat', sans-serif;
   border: none;
   background-color: white;
   text-decoration: underline;
   font-size: 1em;
   font-weight: 600;
-}
+} */
 
-.dropdownCalendar {
+/* .dropdownCalendar {
   width: 510px;
   height: auto;
   background-color: white;
@@ -223,13 +222,13 @@ button.guestButton:hover {
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 30px;
-}
+} */
 
-.calendarButtons {
+/* .calendarButtons {
   text-align: right;
-}
+} */
 
-.monthCalendar {
+/* .monthCalendar {
   border: none;
   height: auto;
 }
@@ -265,50 +264,50 @@ button.validDate:focus {
   border-radius: 50%;
   background-color: black;
   color: white;
-}
+} */
 
-.calHeaderText {
+/* .calHeaderText {
   float: center;
   text-align: center;
   margin-bottom: 25px;
   font-weight: 400;
   top: 10px;
-}
+} */
 
-.calHeader {
+/* .calHeader {
   float: left;
-}
+} */
 
-.prevMonthButton {
+/* .prevMonthButton {
   background-color: white;
   border-radius: 50%;
   border: 1px solid transparent;
   float:left;
-}
+} */
 
-.nextMonthButton {
+/* .nextMonthButton {
   background-color: white;
   border-radius: 50%;
   border: 1px solid transparent;
   float: right;
-}
+} */
 
-button.prevMonthButton:hover {
+/* button.prevMonthButton:hover {
   background-color: rgba(128,128,128, 0.1);
 }
 
 button.nextMonthButton:hover {
   background-color: rgba(128,128,128, 0.1);
-}
+} */
 
 
-.daysOfWeek {
+/* .daysOfWeek {
   font-weight: 300;
   font-size: 0.8em;
   color: grey;
-}
+} */
 
-.clearDates {
+/* .clearDates {
   margin-top: 20px;
   margin-right: 10px;
   background-color: white;
@@ -328,12 +327,12 @@ button.nextMonthButton:hover {
   color: white;
   height: 30px;
   width: 70px;
-}
+} */
 
-button.clearDates:hover {
+/* button.clearDates:hover {
   background-color: rgba(128,128,128, 0.1);
-}
+} */
 
-button:focus {
+/* button:focus {
   outline-width: 0;
-}
+} */
