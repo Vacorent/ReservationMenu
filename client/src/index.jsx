@@ -37,7 +37,7 @@ class App extends React.Component {
 
   getAll() {
     const setData = this.setData.bind(this);
-    axios.get('http://localhost:3004/reservation/0')
+    axios.get('/10')
       .then((res) => {
         console.log('good get ', res.data['0'], res.data['1']);
         setData(res.data['0'], res.data['1']);

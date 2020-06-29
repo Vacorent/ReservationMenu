@@ -33,7 +33,7 @@ const makeMonths = (fullCalendar) => {
   return monthsObj;
 };
 
-app.get('/reservation/:id', async (req, res) => {
+app.get('/:id', async (req, res) => {
   const reservationData = await Reservation.find({ _id: req.params.id }).exec();
   if (reservationData.length === 0) {
     res.status(204).send('reservation does not exist');
