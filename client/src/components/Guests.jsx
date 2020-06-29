@@ -86,11 +86,11 @@ class Guests extends React.Component {
               <div>Adults</div>
             </td>
             <td className={styles.guestButtonsTD}>
-              {this.renderAdultMinus()}
-              {' '}
-              {adultCount}
-              {' '}
               {this.renderAdultPlus()}
+              {' '}
+              <div className={styles.countText}>{adultCount}</div>
+              {' '}
+              {this.renderAdultMinus()}
             </td>
           </tr>
           <tr className={styles.guestRow}>
@@ -99,11 +99,11 @@ class Guests extends React.Component {
               <div className={styles.guestStatic} type="button">Ages 2 - 12</div>
             </td>
             <td className={styles.guestButtonsTD}>
-              {this.renderChildMinus()}
-              {' '}
-              {childCount}
-              {' '}
               {this.renderChildPlus()}
+              {' '}
+              <div className={styles.countText}>{childCount}</div>
+              {' '}
+              {this.renderChildMinus()}
             </td>
           </tr>
           <tr className={styles.guestRow}>
@@ -112,11 +112,11 @@ class Guests extends React.Component {
               <div className={styles.guestStatic}>Under 2</div>
             </td>
             <td className={styles.guestButtonsTD}>
-              {this.renderInfantMinus()}
-              {' '}
-              {infantCount}
-              {' '}
               {this.renderInfantPlus()}
+              {' '}
+              <div className={styles.countText}>{infantCount}</div>
+              {' '}
+              {this.renderInfantMinus()}
             </td>
           </tr>
           <tr className={styles.guestRow}>
