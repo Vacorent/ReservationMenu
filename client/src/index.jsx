@@ -37,6 +37,7 @@ class App extends React.Component {
 
   getAll() {
     const setData = this.setData.bind(this);
+    // console.log('here is host',document.defaultView.location.host)
     axios.get('/10')
       .then((res) => {
         console.log('good get ', res.data['0'], res.data['1']);
@@ -60,8 +61,9 @@ class App extends React.Component {
     let { price } = this.state;
     let month, day;
     if (date !== '') {
-      month = parseInt(date.slice(0, 2));
+      month = parseInt(date.slice(0, 2)) - 1;
       day = parseInt(date.slice(3, 5));
+      console.log('in start change', calendar[month][day])
       price = calendar[month][day]['cost'];
     }
     this.setState({

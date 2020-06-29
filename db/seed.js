@@ -21,7 +21,7 @@ Reservation.collection.drop();
       const bookedRand = Math.floor(Math.random() * 2);
       const multplier = isWeekend ? weekendMultipler : 1;
       sampleCalendarDates.push({
-        _id: nextDay.format('MM-DD-YYYY'), cost: cost * multplier, isBooked: bookedRand, costCurrency: curr,
+        _id: nextDay.format('MM-DD-YYYY'), cost: Math.floor(cost * multplier), isBooked: bookedRand, costCurrency: curr,
       });
     }
 

@@ -17,7 +17,8 @@ class Month extends React.Component {
   }
 
   renderView() {
-    const { monthNum, yearNum, data } = this.props;
+    const { monthNum, yearNum, data, startDate, prevData } = this.props;
+    console.log('monthNUm is ', monthNum)
     const startDayOfWeek = Moment([yearNum, monthNum]).startOf('month').day();
     const daysInMonth = Moment([yearNum, monthNum]).daysInMonth();
     const calRows = [];
@@ -54,12 +55,32 @@ class Month extends React.Component {
 
     let rowCount = 0;
     let dayCount = 0;
+    const startDayMoment = Moment(startDate, 'MM/DD/YYYY');
+    let notValidStreak;
+    if (startDayMoment.isBefore(Moment([yearNum, monthNum, 1]))) {
+      console.log(prevData)
+      notValidStreak = false;
+      while (startDayMoment.isBefore(Moment([yearNum, monthNum, 1]))) {
+        if (prevData[startDayMoment.date()].isBooked === true) {
+          notValidStreak = true;
+        }
+        startDayMoment.add(1, 'days');
+      }
+    }
+    console.log(startDayMoment)
     const calEntries = calRows.map((calRow) => {
       rowCount += 1;
       const rowEntries = calRow.map((day) => {
         dayCount += 1;
-        const dateText = day !== '' ? Moment([yearNum, monthNum, day]).format('MM/DD/YYYY') : '';
-        if (data[day] === undefined || data[day].isBooked === true) {
+        const currDate = Moment([yearNum, monthNum, day]);
+        const dateText = day !== '' ? currDate.format('MM/DD/YYYY') : '';
+        if (currDate.format('L') === startDayMoment.format('L')) {
+          notValidStreak = false;
+        }
+        if (data[day] === undefined || data[day].isBooked === true || currDate.isBefore(startDayMoment) || notValidStreak) {
+          if (startDayMoment.month() === monthNum) {
+            notValidStreak = true;
+          }
           return <td key={dayCount}><button className={styles.invalidDate} type="button" disabled>{day}</button></td>;
         }
         return <td key={dayCount}><button className={styles.validDate} type="button" onClick={(() => this.handleDateClick(dateText))}>{day}</button></td>;

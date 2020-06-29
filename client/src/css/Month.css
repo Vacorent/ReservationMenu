@@ -1,6 +1,8 @@
 .monthCalendar {
   border: none;
-  height: auto;
+  height: 200px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .invalidDate {

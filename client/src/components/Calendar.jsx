@@ -23,7 +23,6 @@ class Calendar extends React.Component {
   setDateClick(date) {
     console.log('date in set date is ', date)
     const { startDate, endDate, handleStartChange, handleEndChange } = this.props;
-    console.log('start date is ', startDate)
     if (startDate === '') {
       handleStartChange(date);
     } else if (endDate === '') {
@@ -68,10 +67,6 @@ class Calendar extends React.Component {
     const { handleStartChange, handleEndChange } = this.props;
     handleStartChange('');
     handleEndChange('');
-    // this.setState({
-    //   startDate: '',
-    //   endDate: '',
-    // });
     e.preventDefault();
   }
 
@@ -97,7 +92,7 @@ class Calendar extends React.Component {
 
   renderView() {
     const { isDropdown, currentMonth, currentMonthYear } = this.state;
-    const { calendar } = this.props;
+    const { calendar, startDate } = this.props;
     const nextMonth = Moment([currentMonthYear, currentMonth]).add(1, 'months');
     const nextMonthNum = nextMonth.month();
     const nextMonthYear = nextMonth.year();
@@ -119,6 +114,7 @@ class Calendar extends React.Component {
                 monthNum={currentMonth}
                 yearNum={currentMonthYear}
                 setDateClick={this.setDateClick}
+                startDate={startDate}
               />
             </td>
             <td className={styles.calHeader}>
@@ -129,10 +125,12 @@ class Calendar extends React.Component {
                 {nextMonthYear}
               </div>
               <Month
+                prevData={calendar[currentMonth]}
                 data={calendar[nextMonthNum]}
                 monthNum={nextMonthNum}
                 yearNum={nextMonthYear}
                 setDateClick={this.setDateClick}
+                startDate={startDate}
               />
             </td>
           </tr>
