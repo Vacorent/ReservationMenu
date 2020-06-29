@@ -18,7 +18,7 @@ class Month extends React.Component {
 
   renderView() {
     const { monthNum, yearNum, data, startDate, prevData } = this.props;
-    console.log('monthNUm is ', monthNum)
+    // console.log('monthNum is ', monthNum)
     const startDayOfWeek = Moment([yearNum, monthNum]).startOf('month').day();
     const daysInMonth = Moment([yearNum, monthNum]).daysInMonth();
     const calRows = [];
@@ -58,7 +58,7 @@ class Month extends React.Component {
     const startDayMoment = Moment(startDate, 'MM/DD/YYYY');
     let notValidStreak;
     if (startDayMoment.isBefore(Moment([yearNum, monthNum, 1]))) {
-      console.log(prevData)
+      // console.log(prevData)
       notValidStreak = false;
       while (startDayMoment.isBefore(Moment([yearNum, monthNum, 1]))) {
         if (prevData[startDayMoment.date()].isBooked === true) {
@@ -67,7 +67,7 @@ class Month extends React.Component {
         startDayMoment.add(1, 'days');
       }
     }
-    console.log(startDayMoment)
+    // console.log(startDayMoment)
     const calEntries = calRows.map((calRow) => {
       rowCount += 1;
       const rowEntries = calRow.map((day) => {

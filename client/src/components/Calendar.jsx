@@ -21,7 +21,7 @@ class Calendar extends React.Component {
   }
 
   setDateClick(date) {
-    console.log('date in set date is ', date)
+    // console.log('date in set date is ', date)
     const { startDate, endDate, handleStartChange, handleEndChange } = this.props;
     if (startDate === '') {
       handleStartChange(date);
@@ -32,7 +32,7 @@ class Calendar extends React.Component {
   }
 
   prevMonthClick(e) {
-    console.log('prevmonth clicked');
+    // console.log('prevmonth clicked');
     const { currentMonth, currentMonthYear } = this.state;
     if (currentMonth !== Moment().month() || currentMonthYear !== Moment().year()) {
       this.setState({
@@ -44,7 +44,7 @@ class Calendar extends React.Component {
   }
 
   nextMonthClick(e) {
-    console.log('nextmonth clicked');
+    // console.log('nextmonth clicked');
     const { currentMonth, currentMonthYear } = this.state;
     if (currentMonth !== (Moment().month() - 2) || currentMonthYear !== (Moment().year() + 1)) {
       this.setState({
@@ -56,7 +56,7 @@ class Calendar extends React.Component {
   }
 
   dropdownClick(e) {
-    console.log('calendar clicked');
+    // console.log('calendar clicked');
     const { isDropdown } = this.state;
     this.setState({
       isDropdown: !isDropdown,

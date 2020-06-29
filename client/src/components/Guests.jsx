@@ -13,7 +13,7 @@ class Guests extends React.Component {
   }
 
   dropdownClick(e) {
-    console.log('table clicked');
+    // console.log('table clicked');
     const { isDropdown } = this.state;
     this.setState({
       isDropdown: !isDropdown,

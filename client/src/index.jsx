@@ -43,7 +43,7 @@ class App extends React.Component {
     // console.log('here is host',document.defaultView.location.host)
     axios.get('/10')
       .then((res) => {
-        console.log('good get ', res.data['0'], res.data['1']);
+        // console.log('good get ', res.data['0'], res.data['1']);
         setData(res.data['0'], res.data['1']);
       })
       .catch((err) => { console.log('error in get ', err); });
@@ -56,7 +56,7 @@ class App extends React.Component {
     while (suggestStart === '') {
       currDay = today.date();
       currMonth = today.month();
-      console.log('todays day and month are ', Moment([currMonth, currDay]))
+      // console.log('todays day and month are ', Moment([currMonth, currDay]))
       if (cal[currMonth][currDay]['isBooked'] === false) {
         suggestStart = today.format('MM/DD/YYYY');
       } else {
@@ -91,7 +91,7 @@ class App extends React.Component {
     if (date !== '') {
       month = parseInt(date.slice(0, 2)) - 1;
       day = parseInt(date.slice(3, 5));
-      console.log('in start change', calendar[month][day])
+      // console.log('in start change', calendar[month][day])
       price = calendar[month][day]['cost'];
     }
     this.setState({
@@ -123,7 +123,7 @@ class App extends React.Component {
       stayDuration = 0;
       stayCal = [];
     }
-    console.log(stayCal)
+    // console.log(stayCal)
     this.setState({
       price: price,
       endDate: date,
