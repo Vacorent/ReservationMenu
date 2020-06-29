@@ -21,43 +21,57 @@ class Guests extends React.Component {
     e.preventDefault();
   }
 
-  // changeGuestCount(type, inc) {
-  //   const { adultCount, childCount, infantCount } = this.state;
-  //   if (type === 'adult') {
-  //     if (inc === 1) {
-  //       this.setState({
-  //         adultCount: adultCount + 1,
-  //       });
-  //     } else {
-  //       this.setState({
-  //         adultCount: adultCount - 1,
-  //       });
-  //     }
-  //   } else if (type === 'child') {
-  //     if (inc === 1) {
-  //       this.setState({
-  //         childCount: childCount + 1,
-  //       });
-  //     } else {
-  //       this.setState({
-  //         childCount: childCount - 1,
-  //       });
-  //     }
-  //   } else if (type === 'infant') {
-  //     if (inc === 1) {
-  //       this.setState({
-  //         infantCount: infantCount + 1,
-  //       });
-  //     } else {
-  //       this.setState({
-  //         infantCount: infantCount - 1,
-  //       });
-  //     }
-  //   }
-  // }
   changeGuestCount(type, inc) {
     const { handleGuestChange } = this.props;
     handleGuestChange(type, inc);
+  }
+
+  renderAdultMinus() {
+    const { adultCount } = this.props;
+    if (adultCount === 1) {
+      return <button className={styles.guestButtonDis} type="button" disabled>-</button>
+    }
+    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('adult', 0); }}>-</button>
+  }
+
+  renderAdultPlus() {
+    const { adultCount, childCount, capacity } = this.props;
+    if (adultCount + childCount === capacity) {
+      return <button className={styles.guestButtonDis} type="button" disabled>+</button>
+    }
+    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('adult', 1); }}>+</button>
+  }
+
+  renderChildMinus() {
+    const { childCount } = this.props;
+    if (childCount === 0) {
+      return <button className={styles.guestButtonDis} type="button" disabled>-</button>
+    }
+    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('child', 0); }}>-</button>
+  }
+
+  renderChildPlus() {
+    const { adultCount, childCount, capacity } = this.props;
+    if (adultCount + childCount === capacity) {
+      return <button className={styles.guestButtonDis} type="button" disabled>+</button>
+    }
+    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('child', 1); }}>+</button>
+  }
+
+  renderInfantMinus() {
+    const { infantCount } = this.props;
+    if (infantCount === 0) {
+      return <button className={styles.guestButtonDis} type="button" disabled>-</button>
+    }
+    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('infant', 0); }}>-</button>
+  }
+
+  renderInfantPlus() {
+    const { infantCount } = this.props;
+    if (infantCount === 5) {
+      return <button className={styles.guestButtonDis} type="button" disabled>+</button>
+    }
+    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('infant', 1); }}>+</button>
   }
 
   renderView() {
@@ -72,11 +86,11 @@ class Guests extends React.Component {
               <div>Adults</div>
             </td>
             <td className={styles.guestButtonsTD}>
-              <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('adult', 0); }}>-</button>
+              {this.renderAdultPlus()}
               {' '}
-              {adultCount}
+              <div className={styles.countText}>{adultCount}</div>
               {' '}
-              <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('adult', 1); }}>+</button>
+              {this.renderAdultMinus()}
             </td>
           </tr>
           <tr className={styles.guestRow}>
@@ -85,11 +99,11 @@ class Guests extends React.Component {
               <div className={styles.guestStatic} type="button">Ages 2 - 12</div>
             </td>
             <td className={styles.guestButtonsTD}>
-              <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('child', 0); }}>-</button>
+              {this.renderChildPlus()}
               {' '}
-              {childCount}
+              <div className={styles.countText}>{childCount}</div>
               {' '}
-              <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('child', 1); }}>+</button>
+              {this.renderChildMinus()}
             </td>
           </tr>
           <tr className={styles.guestRow}>
@@ -98,13 +112,12 @@ class Guests extends React.Component {
               <div className={styles.guestStatic}>Under 2</div>
             </td>
             <td className={styles.guestButtonsTD}>
-              <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('infant', 0); }}>-</button>
+              {this.renderInfantPlus()}
               {' '}
-              {infantCount}
+              <div className={styles.countText}>{infantCount}</div>
               {' '}
-              <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('infant', 1); }}>+</button>
+              {this.renderInfantMinus()}
             </td>
-
           </tr>
           <tr className={styles.guestRow}>
             <td colSpan="2" className={styles.maxCapacityText}>
