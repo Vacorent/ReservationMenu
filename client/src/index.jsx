@@ -25,10 +25,13 @@ class App extends React.Component {
       childCount: 0,
       infantCount: 0,
       guestCountMultiplier: 1,
+      suggestStart: '',
+      suggestEnd: '',
     };
     this.handleStartChange = this.handleStartChange.bind(this);
     this.handleEndChange = this.handleEndChange.bind(this);
     this.handleGuestChange = this.handleGuestChange.bind(this);
+    this.handleSuggestion = this.handleSuggestion.bind(this);
   }
 
   componentDidMount() {
@@ -47,12 +50,37 @@ class App extends React.Component {
   }
 
   setData(data, cal) {
+    let today = Moment().add(1, 'days');
+    let currDay, currMonth;
+    let { suggestStart, suggestEnd } = this.state;
+    while (suggestStart === '') {
+      currDay = today.date();
+      currMonth = today.month();
+      console.log('todays day and month are ', Moment([currMonth, currDay]))
+      if (cal[currMonth][currDay]['isBooked'] === false) {
+        suggestStart = today.format('MM/DD/YYYY');
+      } else {
+        today.add(1, 'days');
+      }
+    }
+    while (suggestEnd === '') {
+      currDay = today.date();
+      currMonth = today.month();
+      if (cal[currMonth][currDay]['isBooked'] === true) {
+        today.subtract(1, 'days');
+        suggestEnd = today.format('MM/DD/YYYY');
+      } else {
+        today.add(1, 'days');
+      }
+    }
     this.setState({
       price: cal['0']['1'].cost,
       rating: data.reviewAverage,
       reviewCount: data.reviewCount,
       capacity: data.guestCapacity,
       calendar: cal,
+      suggestStart: suggestStart,
+      suggestEnd: suggestEnd,
     });
   }
 
@@ -145,6 +173,15 @@ class App extends React.Component {
     }
   }
 
+  handleSuggestion(e) {
+    const { suggestStart, suggestEnd } = this.state;
+    this.handleStartChange(suggestStart);
+    setTimeout(() => {
+      this.handleEndChange(suggestEnd)
+    }, 100);
+    e.preventDefault();
+  }
+
   renderAvailButton() {
     const { startDate, endDate } = this.state;
     if (startDate && endDate) {
@@ -167,15 +204,15 @@ class App extends React.Component {
           <div className={styles.costDrop}>
             <div>You won't be charged yet</div>
           </div>
-            <div className={styles.costBox}>
-              <div className={styles.costLeft}>{'$'}{finalPrice}{' x '}{stayDuration}{nightText}</div><div className={styles.costRight}>{'$'}{subCost}</div>
-            </div>
-            <div className={styles.costBox}>
-              <div className={styles.costLeft}>Cleaning fee</div><div className={styles.costRight}>{'$'}{cleaningFee}</div>
-            </div>
-            <div className={styles.costBoxLast}>
-              <div className={styles.costLeft}>Service Fee</div><div className={styles.costRight}>{'$'}{serviceFee}</div>
-            </div>
+          <div className={styles.costBox}>
+            <div className={styles.costLeft}>{'$'}{finalPrice}{' x '}{stayDuration}{nightText}</div><div className={styles.costRight}>{'$'}{subCost}</div>
+          </div>
+          <div className={styles.costBox}>
+            <div className={styles.costLeft}>Cleaning fee</div><div className={styles.costRight}>{'$'}{cleaningFee}</div>
+          </div>
+          <div className={styles.costBoxLast}>
+            <div className={styles.costLeft}>Service Fee</div><div className={styles.costRight}>{'$'}{serviceFee}</div>
+          </div>
           <div className={styles.costTotal}>
             <div className={styles.costTotalLeft}>Total</div><div className={styles.costTotalRight}>{'$'}{totalCost}</div>
           </div>
@@ -183,6 +220,33 @@ class App extends React.Component {
       )
     }
     return null;
+  }
+
+  renderSuggestions() {
+    const { endDate, suggestStart, suggestEnd } = this.state;
+    const formatSuggStart = Moment(suggestStart, 'MM/DD/YYYY').format('MMM D');
+    const formatSuggEnd = Moment(suggestEnd, 'MM/DD/YYYY').format('MMM D');
+    if (endDate) {
+      return (
+        <div className={styles.suggestionBox}>
+        <div className={styles.suggText}>
+        <span className={styles.suggestionBold}>This is a rare find </span>
+          <span>Dennis and Bradley's place is normally booked!</span>
+        </div>
+        <span className={styles.suggCal} role="img" aria-labelledby="calendar">&#x1F48E;</span>
+      </div>
+      )
+    }
+    return (
+      <div className={styles.suggestionBox}>
+        <div className={styles.suggText}>
+          <span className={styles.suggestionBold}>Possible dates for your trip </span><span>This place is available {formatSuggStart} - {formatSuggEnd}.</span>
+          {' '}
+          <a onClick={this.handleSuggestion} className={styles.addDates}>Add these dates</a>
+        </div>
+        <span className={styles.suggCal} role="img" aria-labelledby="calendar">&#x1F4D6;</span>
+      </div>
+    )
 
   }
 
@@ -194,6 +258,7 @@ class App extends React.Component {
     price = parseInt(price * guestCountMultiplier);
     let { rating } = this.state;
     rating = rating.toFixed(2);
+
     return (
       <>
         <div className={styles.root}>
@@ -203,6 +268,7 @@ class App extends React.Component {
           {this.renderAvailButton()}
           {this.renderCosts()}
         </div>
+        {this.renderSuggestions()}
       </>
     );
   }
