@@ -42,24 +42,30 @@ class App extends React.Component {
 
   getAll() {
     const setData = this.setData.bind(this);
-    // console.log('here is host',document.defaultView.location.host)
-    axios.get('/10')
+    // console.log('here is host', window.location)
+    axios.get('/reservation/10')
       .then((res) => {
-        // console.log('good get ', res.data['0'], res.data['1']);
         setData(res.data['0'], res.data['1']);
+        // const origin = window.location.origin;
+        // const id = window.location;
+        // axios.get(`${origin}/reservation/10`)
+        //   .then((res) => {
+        //     setData(res.data['0'], res.data['1']);
+        //   })
       })
       .catch((err) => { console.log('error in get ', err); });
   }
 
   setData(data, cal) {
-    let today = Moment().add(1, 'days');
-    let currDay, currMonth;
+    const today = Moment().add(1, 'days');
+    let currDay; let
+      currMonth;
     let { suggestStart, suggestEnd } = this.state;
     while (suggestStart === '') {
       currDay = today.date();
       currMonth = today.month();
       // console.log('todays day and month are ', Moment([currMonth, currDay]))
-      if (cal[currMonth][currDay]['isBooked'] === false) {
+      if (cal[currMonth][currDay].isBooked === false) {
         suggestStart = today.format('MM/DD/YYYY');
       } else {
         today.add(1, 'days');
@@ -68,7 +74,7 @@ class App extends React.Component {
     while (suggestEnd === '') {
       currDay = today.date();
       currMonth = today.month();
-      if (cal[currMonth][currDay]['isBooked'] === true) {
+      if (cal[currMonth][currDay].isBooked === true) {
         today.subtract(1, 'days');
         suggestEnd = today.format('MM/DD/YYYY');
       } else {
@@ -81,42 +87,50 @@ class App extends React.Component {
       reviewCount: data.reviewCount,
       capacity: data.guestCapacity,
       calendar: cal,
-      suggestStart: suggestStart,
-      suggestEnd: suggestEnd,
+      suggestStart,
+      suggestEnd,
     });
   }
 
   handleStartChange(date) {
     const { calendar } = this.state;
     let { price } = this.state;
-    let month, day;
     if (date !== '') {
-      month = parseInt(date.slice(0, 2)) - 1;
-      day = parseInt(date.slice(3, 5));
+      const month = parseInt(date.slice(0, 2), 10) - 1;
+      const day = parseInt(date.slice(3, 5), 10);
       // console.log('in start change', calendar[month][day])
-      price = calendar[month][day]['cost'];
+      price = calendar[month][day].cost;
+      this.setState({
+        startDate: date,
+        price,
+      });
+    } else {
+      this.setState({
+        startDate: '',
+        price,
+      });
     }
-    this.setState({
-      startDate: date,
-      price: price,
-    })
   }
 
   handleEndChange(date) {
     const { calendar, startDate } = this.state;
-    let { totalPrice, stayDuration, price, stayCal } = this.state;
-    let month, day, startMonth, startDay;
+    let {
+      totalPrice, stayDuration, price, stayCal,
+    } = this.state;
+    let month; let day; let startMonth; let
+      startDay;
     if (date !== '') {
       totalPrice = 0;
-      const startMoment = Moment(startDate, "MM/DD/YYYY");
-      const endMoment = Moment(date, "MM/DD/YYYY").add(1, 'days');
-      let currMonth, currDate;
+      const startMoment = Moment(startDate, 'MM/DD/YYYY');
+      const endMoment = Moment(date, 'MM/DD/YYYY').add(1, 'days');
+      let currMonth; let
+        currDate;
       while (startMoment.isBefore(endMoment)) {
         currMonth = startMoment.month();
         currDate = startMoment.date();
-        totalPrice += calendar[currMonth][currDate]['cost'];
+        totalPrice += calendar[currMonth][currDate].cost;
         stayDuration += 1;
-        stayCal.push([startMoment, calendar[currMonth][currDate]['cost']]);
+        stayCal.push([startMoment, calendar[currMonth][currDate].cost]);
         startMoment.add(1, 'days');
       }
       price = parseInt(totalPrice / stayDuration);
@@ -127,16 +141,18 @@ class App extends React.Component {
     }
     // console.log(stayCal)
     this.setState({
-      price: price,
+      price,
       endDate: date,
-      totalPrice: totalPrice,
-      stayDuration: stayDuration,
-      stayCal: stayCal,
-    })
+      totalPrice,
+      stayDuration,
+      stayCal,
+    });
   }
 
   handleGuestChange(type, inc) {
-    const { adultCount, childCount, infantCount, guestCountMultiplier } = this.state;
+    const {
+      adultCount, childCount, infantCount, guestCountMultiplier,
+    } = this.state;
     const totalCount = adultCount + childCount;
     if (type === 'adult') {
       if (inc === 1) {
@@ -179,7 +195,7 @@ class App extends React.Component {
     const { suggestStart, suggestEnd } = this.state;
     this.handleStartChange(suggestStart);
     setTimeout(() => {
-      this.handleEndChange(suggestEnd)
+      this.handleEndChange(suggestEnd);
     }, 100);
     e.preventDefault();
   }
@@ -187,17 +203,17 @@ class App extends React.Component {
   handleCostDropdownClick(e) {
     const { costBreakdown } = this.state;
     this.setState({
-      costBreakdown: !costBreakdown
-    })
+      costBreakdown: !costBreakdown,
+    });
     e.preventDefault();
   }
 
   renderAvailButton() {
     const { startDate, endDate } = this.state;
     if (startDate && endDate) {
-      return <button type="submit" className={styles.availButton}>Reserve</button>
+      return <button type="submit" className={styles.availButton}>Reserve</button>;
     }
-    return <button type="submit" className={styles.availButton}>Check availability</button>
+    return <button type="submit" className={styles.availButton}>Check availability</button>;
   }
 
   renderCostBreakdown() {
@@ -205,13 +221,15 @@ class App extends React.Component {
     if (costBreakdown) {
       return (
         <div className={styles.costDropdown}>test</div>
-      )
+      );
     }
     return null;
   }
 
   renderCosts() {
-    const { endDate, totalPrice, stayDuration, price, guestCountMultiplier } = this.state;
+    const {
+      endDate, totalPrice, stayDuration, price, guestCountMultiplier,
+    } = this.state;
     const finalPrice = parseInt(price * guestCountMultiplier);
     const subCost = finalPrice * stayDuration;
     const cleaningFee = parseInt(subCost / 8.2) + 8;
@@ -225,20 +243,42 @@ class App extends React.Component {
             <div>You won't be charged yet</div>
           </div>
           <div className={styles.costBox}>
-            <div className={styles.costLeft} onClick={this.handleCostDropdownClick}>{'$'}{finalPrice}{' x '}{stayDuration}{nightText}</div><div className={styles.costRight}>{'$'}{subCost}</div>
+            <div className={styles.costLeft} onClick={this.handleCostDropdownClick}>
+              $
+              {finalPrice}
+              {' x '}
+              {stayDuration}
+              {nightText}
+            </div>
+            <div className={styles.costRight}>
+              $
+              {subCost}
+            </div>
             {this.renderCostBreakdown()}
           </div>
           <div className={styles.costBox}>
-            <div className={styles.costLeftNoUnder}>Cleaning fee</div><div className={styles.costRight}>{'$'}{cleaningFee}</div>
+            <div className={styles.costLeftNoUnder}>Cleaning fee</div>
+            <div className={styles.costRight}>
+              $
+              {cleaningFee}
+            </div>
           </div>
           <div className={styles.costBoxLast}>
-            <div className={styles.costLeftNoUnder}>Service Fee</div><div className={styles.costRight}>{'$'}{serviceFee}</div>
+            <div className={styles.costLeftNoUnder}>Service Fee</div>
+            <div className={styles.costRight}>
+              $
+              {serviceFee}
+            </div>
           </div>
           <div className={styles.costTotal}>
-            <div className={styles.costTotalLeft}>Total</div><div className={styles.costTotalRight}>{'$'}{totalCost}</div>
+            <div className={styles.costTotalLeft}>Total</div>
+            <div className={styles.costTotalRight}>
+              $
+              {totalCost}
+            </div>
           </div>
         </>
-      )
+      );
     }
     return null;
   }
@@ -250,25 +290,33 @@ class App extends React.Component {
     if (endDate) {
       return (
         <div className={styles.suggestionBox}>
-        <div className={styles.suggText}>
-        <span className={styles.suggestionBold}>This is a rare find </span>
-          <span>Dennis and Bradley's place is normally booked!</span>
+          <div className={styles.suggText}>
+            <span className={styles.suggestionBold}>This is a rare find </span>
+            <span>Dennis and Bradley's place is normally booked!</span>
+          </div>
+          <span className={styles.suggCal} role="img" aria-labelledby="calendar">&#x1F48E;</span>
         </div>
-        <span className={styles.suggCal} role="img" aria-labelledby="calendar">&#x1F48E;</span>
-      </div>
-      )
+      );
     }
     return (
       <div className={styles.suggestionBox}>
         <div className={styles.suggText}>
-          <span className={styles.suggestionBold}>Possible dates for your trip </span><span>This place is available {formatSuggStart} - {formatSuggEnd}.</span>
+          <span className={styles.suggestionBold}>Possible dates for your trip </span>
+          <span>
+            This place is available
+            {' '}
+            {formatSuggStart}
+            {' '}
+            -
+            {formatSuggEnd}
+            .
+          </span>
           {' '}
           <a onClick={this.handleSuggestion} className={styles.addDates}>Add these dates</a>
         </div>
         <span className={styles.suggCal} role="img" aria-labelledby="calendar">&#x1F4D6;</span>
       </div>
-    )
-
+    );
   }
 
   render() {

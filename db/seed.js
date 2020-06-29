@@ -1,20 +1,19 @@
 const moment = require('moment');
 require('./index.js');
-const mongoose = require('mongoose');
 const Reservation = require('./Reservation.js');
 
 Reservation.collection.drop();
 
 (function () {
-  for (var i = 0; i < 101; i += 1) {
+  for (let i = 0; i < 101; i += 1) {
     const today = moment();
 
-    const cost = Math.floor(Math.random()*300) + 30;
+    const cost = Math.floor(Math.random() * 300) + 30;
     const curr = 'USD';
     const weekendMultipler = 1.2;
 
     const sampleCalendarDates = [];
-    for (let i = 0; i < 330; i += 1) {
+    for (let j = 0; j < 330; j += 1) {
       const nextDay = today.add(1, 'days');
       const dayOfWeek = nextDay.day();
       const isWeekend = (dayOfWeek === 6) || (dayOfWeek === 0);
@@ -25,8 +24,8 @@ Reservation.collection.drop();
       });
     }
 
-    const rating = parseFloat(((Math.random()*3) + 2).toFixed(2));
-    const numberOfReviews = Math.floor(Math.random()*700) + 25;
+    const rating = parseFloat(((Math.random() * 3) + 2).toFixed(2));
+    const numberOfReviews = Math.floor(Math.random() * 700) + 25;
     const capacity = Math.floor(cost / 25);
     const sampleReservation = {
       _id: i,
@@ -36,6 +35,6 @@ Reservation.collection.drop();
       calendar: sampleCalendarDates,
     };
     Reservation.create(sampleReservation)
-      .then(() => console.log('success'))
+      .then(() => console.log('success'));
   }
 }());

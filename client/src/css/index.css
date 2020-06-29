@@ -58,6 +58,7 @@ button {
 .costLeft {
   float: left;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .costLeftNoUnder {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
-import styles from './../css/Month.css';
+import styles from '../css/Month.css';
 
 class Month extends React.Component {
   constructor(props) {
@@ -17,7 +17,9 @@ class Month extends React.Component {
   }
 
   renderView() {
-    const { monthNum, yearNum, data, startDate, prevData } = this.props;
+    const {
+      monthNum, yearNum, data, startDate, prevData,
+    } = this.props;
     // console.log('monthNum is ', monthNum)
     const startDayOfWeek = Moment([yearNum, monthNum]).startOf('month').day();
     const daysInMonth = Moment([yearNum, monthNum]).daysInMonth();
@@ -77,7 +79,11 @@ class Month extends React.Component {
         if (currDate.format('L') === startDayMoment.format('L') && startDate === dateText) {
           notValidStreak = false;
         }
-        if (data[day] === undefined || data[day].isBooked === true || currDate.isBefore(startDayMoment) || notValidStreak) {
+        if (data[day] === undefined
+          || data[day].isBooked === true
+          || currDate.isBefore(startDayMoment)
+          || notValidStreak
+        ) {
           if (startDayMoment.month() === monthNum && day !== '') {
             notValidStreak = true;
           }
@@ -130,6 +136,11 @@ Month.propTypes = {
   yearNum: PropTypes.number.isRequired,
   data: PropTypes.objectOf(PropTypes.object).isRequired,
   setDateClick: PropTypes.func.isRequired,
+  startDate: PropTypes.string.isRequired,
+  prevData: PropTypes.objectOf(PropTypes.object),
 };
 
+Month.defaultProps = {
+  prevData: {},
+};
 export default Month;
