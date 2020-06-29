@@ -60,6 +60,10 @@ button {
   text-decoration: underline;
 }
 
+.costLeftNoUnder {
+  float: left;
+}
+
 .costRight {
   float: right;
 }

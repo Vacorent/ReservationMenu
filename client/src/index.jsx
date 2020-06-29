@@ -208,10 +208,10 @@ class App extends React.Component {
             <div className={styles.costLeft}>{'$'}{finalPrice}{' x '}{stayDuration}{nightText}</div><div className={styles.costRight}>{'$'}{subCost}</div>
           </div>
           <div className={styles.costBox}>
-            <div className={styles.costLeft}>Cleaning fee</div><div className={styles.costRight}>{'$'}{cleaningFee}</div>
+            <div className={styles.costLeftNoUnder}>Cleaning fee</div><div className={styles.costRight}>{'$'}{cleaningFee}</div>
           </div>
           <div className={styles.costBoxLast}>
-            <div className={styles.costLeft}>Service Fee</div><div className={styles.costRight}>{'$'}{serviceFee}</div>
+            <div className={styles.costLeftNoUnder}>Service Fee</div><div className={styles.costRight}>{'$'}{serviceFee}</div>
           </div>
           <div className={styles.costTotal}>
             <div className={styles.costTotalLeft}>Total</div><div className={styles.costTotalRight}>{'$'}{totalCost}</div>
