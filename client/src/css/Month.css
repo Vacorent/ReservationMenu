@@ -24,6 +24,10 @@
   height: 30px;
 }
 
+button.invalidDate:hover {
+  cursor: auto;
+}
+
 button.validDate:hover {
   border-radius: 50%;
   border-color: black;

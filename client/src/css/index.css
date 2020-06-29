@@ -133,3 +133,18 @@ button {
   padding-top: 10px;
   padding-right: 10px;
 }
+
+.costDropdown {
+  display: block;
+  position: absolute;
+  margin-top: 20px;
+  background-color: white;
+  width: 305px;
+  box-shadow: 10px 10px 10px -10px rgba(0,0,0,0.2), 10px 10px 10px -10px rgba(0,0,0,0.2), -10px 10px 10px -10px rgba(0,0,0,0.2);
+  z-index: 1;
+  font-weight: 600;
+  font-size: 1.2em;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
+}

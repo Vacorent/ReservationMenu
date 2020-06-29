@@ -27,11 +27,13 @@ class App extends React.Component {
       guestCountMultiplier: 1,
       suggestStart: '',
       suggestEnd: '',
+      costBreakdown: false,
     };
     this.handleStartChange = this.handleStartChange.bind(this);
     this.handleEndChange = this.handleEndChange.bind(this);
     this.handleGuestChange = this.handleGuestChange.bind(this);
     this.handleSuggestion = this.handleSuggestion.bind(this);
+    this.handleCostDropdownClick = this.handleCostDropdownClick.bind(this);
   }
 
   componentDidMount() {
@@ -182,12 +184,30 @@ class App extends React.Component {
     e.preventDefault();
   }
 
+  handleCostDropdownClick(e) {
+    const { costBreakdown } = this.state;
+    this.setState({
+      costBreakdown: !costBreakdown
+    })
+    e.preventDefault();
+  }
+
   renderAvailButton() {
     const { startDate, endDate } = this.state;
     if (startDate && endDate) {
       return <button type="submit" className={styles.availButton}>Reserve</button>
     }
     return <button type="submit" className={styles.availButton}>Check availability</button>
+  }
+
+  renderCostBreakdown() {
+    const { costBreakdown } = this.state;
+    if (costBreakdown) {
+      return (
+        <div className={styles.costDropdown}>test</div>
+      )
+    }
+    return null;
   }
 
   renderCosts() {
@@ -205,7 +225,8 @@ class App extends React.Component {
             <div>You won't be charged yet</div>
           </div>
           <div className={styles.costBox}>
-            <div className={styles.costLeft}>{'$'}{finalPrice}{' x '}{stayDuration}{nightText}</div><div className={styles.costRight}>{'$'}{subCost}</div>
+            <div className={styles.costLeft} onClick={this.handleCostDropdownClick}>{'$'}{finalPrice}{' x '}{stayDuration}{nightText}</div><div className={styles.costRight}>{'$'}{subCost}</div>
+            {this.renderCostBreakdown()}
           </div>
           <div className={styles.costBox}>
             <div className={styles.costLeftNoUnder}>Cleaning fee</div><div className={styles.costRight}>{'$'}{cleaningFee}</div>

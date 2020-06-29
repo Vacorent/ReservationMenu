@@ -74,11 +74,11 @@ class Month extends React.Component {
         dayCount += 1;
         const currDate = Moment([yearNum, monthNum, day]);
         const dateText = day !== '' ? currDate.format('MM/DD/YYYY') : '';
-        if (currDate.format('L') === startDayMoment.format('L')) {
+        if (currDate.format('L') === startDayMoment.format('L') && startDate === dateText) {
           notValidStreak = false;
         }
         if (data[day] === undefined || data[day].isBooked === true || currDate.isBefore(startDayMoment) || notValidStreak) {
-          if (startDayMoment.month() === monthNum) {
+          if (startDayMoment.month() === monthNum && day !== '') {
             notValidStreak = true;
           }
           return <td key={dayCount}><button className={styles.invalidDate} type="button" disabled>{day}</button></td>;
