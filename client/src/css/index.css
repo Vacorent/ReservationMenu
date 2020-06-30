@@ -135,17 +135,60 @@ button {
   padding-right: 10px;
 }
 
-.costDropdown {
-  display: block;
-  position: absolute;
-  margin-top: 20px;
+.costBreak {
+  width: 300px;
+  height: auto;
   background-color: white;
-  width: 305px;
-  box-shadow: 10px 10px 10px -10px rgba(0,0,0,0.2), 10px 10px 10px -10px rgba(0,0,0,0.2), -10px 10px 10px -10px rgba(0,0,0,0.2);
+  position: absolute;
+  margin-top: 30px;
+  border-radius: 0;
+  border: 0px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
   z-index: 1;
+  font-weight: 300;
+  font-size: 1em;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.costTotalBreak {
   font-weight: 600;
-  font-size: 1.2em;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 15px;
+  font-size: 1em;
+  text-align: center;
+  margin-bottom: 10px;
+  border-top: 1px solid rgba(220,220,220,0.8);
+  width: 320px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.costClose {
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  float:left;
+  margin-right: 5px;
+}
+
+button.costClose:hover {
+  background-color: rgba(128,128,128, 0.1);
+}
+
+.costBreakLeft {
+  float: left;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.costBreakRight {
+  float: right;
+  margin-bottom: 10px;
+}
+
+.addGuestText {
+  font-weight: 300;
+  color: gray;
+  font-size: 0.8em;
 }

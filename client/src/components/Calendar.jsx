@@ -60,6 +60,8 @@ class Calendar extends React.Component {
   dropdownClick() {
     // console.log('calendar clicked');
     const { isDropdown } = this.state;
+    const { handleCostClose } = this.props;
+    handleCostClose();
     this.setState({
       isDropdown: !isDropdown,
     });
@@ -152,7 +154,7 @@ class Calendar extends React.Component {
 
   render() {
     const {
-      capacity, adultCount, childCount, infantCount, handleGuestChange,
+      capacity, adultCount, childCount, infantCount, handleGuestChange, handleCostClose
     } = this.props;
     let { startDate, endDate } = this.props;
     const { isDropdown } = this.state;
@@ -191,6 +193,7 @@ class Calendar extends React.Component {
           childCount={childCount}
           infantCount={infantCount}
           handleGuestChange={handleGuestChange}
+          handleCostClose={handleCostClose}
         />
       </table>
     );

@@ -34,6 +34,7 @@ class App extends React.Component {
     this.handleGuestChange = this.handleGuestChange.bind(this);
     this.handleSuggestion = this.handleSuggestion.bind(this);
     this.handleCostDropdownClick = this.handleCostDropdownClick.bind(this);
+    this.handleCostCloseClick = this.handleCostCloseClick.bind(this);
   }
 
   componentDidMount() {
@@ -46,7 +47,7 @@ class App extends React.Component {
     const id = window.location.href.slice(origin.length + 1);
     axios.get(`/reservation/10`)
       .then((res) => {
-        console.log('res in response is ', res)
+        // console.log('res in response is ', res)
         setData(res.data['0'], res.data['1']);
       })
       .catch((err) => { console.log('error in get ', err); });
@@ -99,11 +100,13 @@ handleStartChange(date) {
     this.setState({
       startDate: date,
       price,
+      costBreakdown: false,
     });
   } else {
     this.setState({
       startDate: '',
       price,
+      costBreakdown: false,
     });
   }
 }
@@ -126,7 +129,7 @@ handleEndChange(date) {
       currDate = startMoment.date();
       totalPrice += calendar[currMonth][currDate].cost;
       stayDuration += 1;
-      stayCal.push([startMoment, calendar[currMonth][currDate].cost]);
+      stayCal.push([startMoment.format('MM/DD/YYYY'), calendar[currMonth][currDate].cost]);
       startMoment.add(1, 'days');
     }
     price = parseInt(totalPrice / stayDuration);
@@ -141,6 +144,7 @@ handleEndChange(date) {
     totalPrice,
     stayDuration,
     stayCal,
+    costBreakdown: false,
   });
 }
 
@@ -203,6 +207,12 @@ handleCostDropdownClick(e) {
   e.preventDefault();
 }
 
+handleCostCloseClick() {
+  this.setState({
+    costBreakdown: false,
+  });
+}
+
 renderAvailButton() {
   const { startDate, endDate } = this.state;
   if (startDate && endDate) {
@@ -212,10 +222,49 @@ renderAvailButton() {
 }
 
 renderCostBreakdown() {
-  const { costBreakdown } = this.state;
+  const { costBreakdown, stayCal, price, guestCountMultiplier, stayDuration } = this.state;
+  const finalBase = parseInt(price * guestCountMultiplier) * stayDuration;
+  const perDayBase = stayCal.reduce((acc, el) => {return acc + el[1]}, 0);
+  // console.log('perdayBase is ', perDayBase)
+  const guestFee = Math.max(finalBase - perDayBase, 0);
+  let stayCalIndex = 0;
+  let stayCalElements = stayCal.map((date) => {
+    stayCalIndex += 1;
+    return (
+      <tr key={stayCalIndex}>
+        <td className={styles.costLeftNoUnder}>{date[0]}</td>
+        <td className={styles.costRight}>${date[1]}</td>
+      </tr>
+    )
+  });
+  let guestFeeElement = guestFee ?
+    <tr >
+      <td className={styles.costLeftNoUnder}>Extra Guest Fee</td>
+      <td className={styles.costRight}>${guestFee}</td>
+      </tr>
+      : null;
+  let addGuestText = guestFee ? <td className={styles.addGuestText}>Includes extra guest fees.</td> : null;
   if (costBreakdown) {
     return (
-      <div className={styles.costDropdown}>test</div>
+      <table className={styles.costBreak}>
+          <tbody>
+          <tr>
+            <td className={styles.costBreakLeft}>Base Price Breakdown</td>
+            <td className={styles.costBreakRight}><button className={styles.costClose} onClick={this.handleCostCloseClick}>x</button></td>
+          </tr>
+            {stayCalElements}
+            {guestFeeElement}
+          <tr className={styles.costTotalBreak}>
+            <td className={styles.costTotalLeft}>Total Base Price</td>
+            <td className={styles.costTotalRight}>${finalBase}</td>
+          </tr>
+          <tr>
+            {addGuestText}
+          </tr>
+          </tbody>
+
+      </table>
+
     );
   }
   return null;
@@ -328,7 +377,7 @@ render() {
       <div className={styles.root}>
         <Header price={price} rating={rating} reviewCount={reviewCount} />
         <br />
-        <Calendar capacity={capacity} calendar={calendar} handleStartChange={this.handleStartChange} handleEndChange={this.handleEndChange} startDate={startDate} endDate={endDate} adultCount={adultCount} childCount={childCount} infantCount={infantCount} handleGuestChange={this.handleGuestChange} />
+        <Calendar capacity={capacity} calendar={calendar} handleStartChange={this.handleStartChange} handleEndChange={this.handleEndChange} startDate={startDate} endDate={endDate} adultCount={adultCount} childCount={childCount} infantCount={infantCount} handleGuestChange={this.handleGuestChange} handleCostClose={this.handleCostCloseClick}/>
         {this.renderAvailButton()}
         {this.renderCosts()}
       </div>
