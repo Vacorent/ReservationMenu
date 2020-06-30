@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
-import styles from './../css/Month.css';
+import styles from '../css/Month.css';
 
 class Month extends React.Component {
   constructor(props) {
@@ -17,7 +17,10 @@ class Month extends React.Component {
   }
 
   renderView() {
-    const { monthNum, yearNum, data } = this.props;
+    const {
+      monthNum, yearNum, data, startDate, prevData,
+    } = this.props;
+    // console.log('monthNum is ', monthNum)
     const startDayOfWeek = Moment([yearNum, monthNum]).startOf('month').day();
     const daysInMonth = Moment([yearNum, monthNum]).daysInMonth();
     const calRows = [];
@@ -54,12 +57,36 @@ class Month extends React.Component {
 
     let rowCount = 0;
     let dayCount = 0;
+    const startDayMoment = Moment(startDate, 'MM/DD/YYYY');
+    let notValidStreak;
+    if (startDayMoment.isBefore(Moment([yearNum, monthNum, 1]))) {
+      // console.log(prevData)
+      notValidStreak = false;
+      while (startDayMoment.isBefore(Moment([yearNum, monthNum, 1]))) {
+        if (prevData[startDayMoment.date()].isBooked === true) {
+          notValidStreak = true;
+        }
+        startDayMoment.add(1, 'days');
+      }
+    }
+    // console.log(startDayMoment)
     const calEntries = calRows.map((calRow) => {
       rowCount += 1;
       const rowEntries = calRow.map((day) => {
         dayCount += 1;
-        const dateText = day !== '' ? Moment([yearNum, monthNum, day]).format('MM/DD/YYYY') : '';
-        if (data[day] === undefined || data[day].isBooked === true) {
+        const currDate = Moment([yearNum, monthNum, day]);
+        const dateText = day !== '' ? currDate.format('MM/DD/YYYY') : '';
+        if (currDate.format('L') === startDayMoment.format('L') && startDate === dateText) {
+          notValidStreak = false;
+        }
+        if (data[day] === undefined
+          || data[day].isBooked === true
+          || currDate.isBefore(startDayMoment)
+          || notValidStreak
+        ) {
+          if (startDayMoment.month() === monthNum && day !== '') {
+            notValidStreak = true;
+          }
           return <td key={dayCount}><button className={styles.invalidDate} type="button" disabled>{day}</button></td>;
         }
         return <td key={dayCount}><button className={styles.validDate} type="button" onClick={(() => this.handleDateClick(dateText))}>{day}</button></td>;
@@ -109,6 +136,11 @@ Month.propTypes = {
   yearNum: PropTypes.number.isRequired,
   data: PropTypes.objectOf(PropTypes.object).isRequired,
   setDateClick: PropTypes.func.isRequired,
+  startDate: PropTypes.string.isRequired,
+  prevData: PropTypes.objectOf(PropTypes.object),
 };
 
+Month.defaultProps = {
+  prevData: {},
+};
 export default Month;

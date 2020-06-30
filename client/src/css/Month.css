@@ -1,6 +1,8 @@
 .monthCalendar {
   border: none;
-  height: auto;
+  height: 200px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .invalidDate {
@@ -20,6 +22,10 @@
   border: 1px solid transparent;
   width: 30px;
   height: 30px;
+}
+
+button.invalidDate:hover {
+  cursor: auto;
 }
 
 button.validDate:hover {

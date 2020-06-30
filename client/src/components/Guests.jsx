@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './../css/Guests.css';
+import styles from '../css/Guests.css';
 
 class Guests extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class Guests extends React.Component {
   }
 
   dropdownClick(e) {
-    console.log('table clicked');
+    // console.log('table clicked');
     const { isDropdown } = this.state;
     this.setState({
       isDropdown: !isDropdown,
@@ -29,49 +29,49 @@ class Guests extends React.Component {
   renderAdultMinus() {
     const { adultCount } = this.props;
     if (adultCount === 1) {
-      return <button className={styles.guestButtonDis} type="button" disabled>-</button>
+      return <button className={styles.guestButtonDis} type="button" disabled>-</button>;
     }
-    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('adult', 0); }}>-</button>
+    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('adult', 0); }}>-</button>;
   }
 
   renderAdultPlus() {
     const { adultCount, childCount, capacity } = this.props;
     if (adultCount + childCount === capacity) {
-      return <button className={styles.guestButtonDis} type="button" disabled>+</button>
+      return <button className={styles.guestButtonDis} type="button" disabled>+</button>;
     }
-    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('adult', 1); }}>+</button>
+    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('adult', 1); }}>+</button>;
   }
 
   renderChildMinus() {
     const { childCount } = this.props;
     if (childCount === 0) {
-      return <button className={styles.guestButtonDis} type="button" disabled>-</button>
+      return <button className={styles.guestButtonDis} type="button" disabled>-</button>;
     }
-    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('child', 0); }}>-</button>
+    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('child', 0); }}>-</button>;
   }
 
   renderChildPlus() {
     const { adultCount, childCount, capacity } = this.props;
     if (adultCount + childCount === capacity) {
-      return <button className={styles.guestButtonDis} type="button" disabled>+</button>
+      return <button className={styles.guestButtonDis} type="button" disabled>+</button>;
     }
-    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('child', 1); }}>+</button>
+    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('child', 1); }}>+</button>;
   }
 
   renderInfantMinus() {
     const { infantCount } = this.props;
     if (infantCount === 0) {
-      return <button className={styles.guestButtonDis} type="button" disabled>-</button>
+      return <button className={styles.guestButtonDis} type="button" disabled>-</button>;
     }
-    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('infant', 0); }}>-</button>
+    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('infant', 0); }}>-</button>;
   }
 
   renderInfantPlus() {
     const { infantCount } = this.props;
     if (infantCount === 5) {
-      return <button className={styles.guestButtonDis} type="button" disabled>+</button>
+      return <button className={styles.guestButtonDis} type="button" disabled>+</button>;
     }
-    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('infant', 1); }}>+</button>
+    return <button className={styles.guestButton} type="button" onClick={() => { this.changeGuestCount('infant', 1); }}>+</button>;
   }
 
   renderView() {
@@ -158,7 +158,7 @@ class Guests extends React.Component {
           {' '}
           {guestText}
         </div>
-      )
+      );
     }
     return (
       <div className={styles.guestText2}>
@@ -170,7 +170,7 @@ class Guests extends React.Component {
         {' '}
         {infantText}
       </div>
-    )
+    );
   }
 
   render() {
@@ -193,6 +193,10 @@ class Guests extends React.Component {
 
 Guests.propTypes = {
   capacity: PropTypes.number.isRequired,
+  handleGuestChange: PropTypes.func.isRequired,
+  adultCount: PropTypes.number.isRequired,
+  childCount: PropTypes.number.isRequired,
+  infantCount: PropTypes.number.isRequired,
 };
 
 export default Guests;

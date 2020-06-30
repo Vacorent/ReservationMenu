@@ -58,6 +58,11 @@ button {
 .costLeft {
   float: left;
   text-decoration: underline;
+  cursor: pointer;
+}
+
+.costLeftNoUnder {
+  float: left;
 }
 
 .costRight {
@@ -95,4 +100,52 @@ button {
 .costTotalRight {
   float: right;
   margin-top: 20px;
+}
+
+.suggestionBox {
+  font-family: 'Montserrat', sans-serif;
+  border: 1px solid rgba(220,220,220,0.8);
+  border-radius: 10px;
+  margin-top: 30px;
+  width: 340px;
+  height: 50px;
+  padding: 20px 20px 20px 20px;
+  font-size: 0.85em;
+}
+
+.suggestionBold {
+  font-weight: 700;
+}
+
+.suggText {
+  width: 270px;
+  float: left;
+}
+
+.addDates {
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.suggCal {
+  float: right;
+  transform: scale(2);
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
+.costDropdown {
+  display: block;
+  position: absolute;
+  margin-top: 20px;
+  background-color: white;
+  width: 305px;
+  box-shadow: 10px 10px 10px -10px rgba(0,0,0,0.2), 10px 10px 10px -10px rgba(0,0,0,0.2), -10px 10px 10px -10px rgba(0,0,0,0.2);
+  z-index: 1;
+  font-weight: 600;
+  font-size: 1.2em;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
 }

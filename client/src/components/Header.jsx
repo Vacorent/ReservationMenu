@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './../css/Header.css';
+import styles from '../css/Header.css';
 
 const Header = ({ rating, price, reviewCount }) => (
   <div>

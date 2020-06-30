@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Reservation = require('../db/Reservation.js');
+const path = require('path');
 
 const app = express();
 const PORT = 3004;
@@ -33,7 +34,12 @@ const makeMonths = (fullCalendar) => {
   return monthsObj;
 };
 
+app.get('/:id', (req, res) => {
+  res.sendFile(path.resolve(`${__dirname}/../client/dist/index.html`));
+});
+
 app.get('/reservation/:id', async (req, res) => {
+  console.log('data get')
   const reservationData = await Reservation.find({ _id: req.params.id }).exec();
   if (reservationData.length === 0) {
     res.status(204).send('reservation does not exist');

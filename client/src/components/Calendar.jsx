@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Moment from 'moment';
 import Guests from './Guests';
 import Month from './Month';
-import styles from './../css/Calendar.css';
+import styles from '../css/Calendar.css';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -21,9 +21,10 @@ class Calendar extends React.Component {
   }
 
   setDateClick(date) {
-    console.log('date in set date is ', date)
-    const { startDate, endDate, handleStartChange, handleEndChange } = this.props;
-    console.log('start date is ', startDate)
+    // console.log('date in set date is ', date)
+    const {
+      startDate, endDate, handleStartChange, handleEndChange,
+    } = this.props;
     if (startDate === '') {
       handleStartChange(date);
     } else if (endDate === '') {
@@ -33,7 +34,7 @@ class Calendar extends React.Component {
   }
 
   prevMonthClick(e) {
-    console.log('prevmonth clicked');
+    // console.log('prevmonth clicked');
     const { currentMonth, currentMonthYear } = this.state;
     if (currentMonth !== Moment().month() || currentMonthYear !== Moment().year()) {
       this.setState({
@@ -45,7 +46,7 @@ class Calendar extends React.Component {
   }
 
   nextMonthClick(e) {
-    console.log('nextmonth clicked');
+    // console.log('nextmonth clicked');
     const { currentMonth, currentMonthYear } = this.state;
     if (currentMonth !== (Moment().month() - 2) || currentMonthYear !== (Moment().year() + 1)) {
       this.setState({
@@ -56,8 +57,8 @@ class Calendar extends React.Component {
     e.preventDefault();
   }
 
-  dropdownClick(e) {
-    console.log('calendar clicked');
+  dropdownClick() {
+    // console.log('calendar clicked');
     const { isDropdown } = this.state;
     this.setState({
       isDropdown: !isDropdown,
@@ -68,10 +69,6 @@ class Calendar extends React.Component {
     const { handleStartChange, handleEndChange } = this.props;
     handleStartChange('');
     handleEndChange('');
-    // this.setState({
-    //   startDate: '',
-    //   endDate: '',
-    // });
     e.preventDefault();
   }
 
@@ -80,9 +77,9 @@ class Calendar extends React.Component {
     if (currentMonth === Moment().month() && currentMonthYear === Moment().year()) {
       return (
         <button onClick={this.prevMonthClick} type="button" className={styles.notAllowed}>{'<'}</button>
-      )
+      );
     }
-    return <button onClick={this.prevMonthClick} type="button" className={styles.prevMonthButton}>{'<'}</button>
+    return <button onClick={this.prevMonthClick} type="button" className={styles.prevMonthButton}>{'<'}</button>;
   }
 
   renderMonthNext() {
@@ -90,14 +87,14 @@ class Calendar extends React.Component {
     if (currentMonth === (Moment().month() - 2) && currentMonthYear === (Moment().year() + 1)) {
       return (
         <button onClick={this.nextMonthClick} type="button" className={styles.notAllowedNext}>{'>'}</button>
-      )
+      );
     }
-    return <button onClick={this.nextMonthClick} type="button" className={styles.nextMonthButton}>{'>'}</button>
+    return <button onClick={this.nextMonthClick} type="button" className={styles.nextMonthButton}>{'>'}</button>;
   }
 
   renderView() {
     const { isDropdown, currentMonth, currentMonthYear } = this.state;
-    const { calendar } = this.props;
+    const { calendar, startDate } = this.props;
     const nextMonth = Moment([currentMonthYear, currentMonth]).add(1, 'months');
     const nextMonthNum = nextMonth.month();
     const nextMonthYear = nextMonth.year();
@@ -119,6 +116,7 @@ class Calendar extends React.Component {
                 monthNum={currentMonth}
                 yearNum={currentMonthYear}
                 setDateClick={this.setDateClick}
+                startDate={startDate}
               />
             </td>
             <td className={styles.calHeader}>
@@ -129,10 +127,12 @@ class Calendar extends React.Component {
                 {nextMonthYear}
               </div>
               <Month
+                prevData={calendar[currentMonth]}
                 data={calendar[nextMonthNum]}
                 monthNum={nextMonthNum}
                 yearNum={nextMonthYear}
                 setDateClick={this.setDateClick}
+                startDate={startDate}
               />
             </td>
           </tr>
@@ -149,7 +149,9 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const { capacity, adultCount, childCount, infantCount, handleGuestChange } = this.props;
+    const {
+      capacity, adultCount, childCount, infantCount, handleGuestChange,
+    } = this.props;
     let { startDate, endDate } = this.props;
     const { isDropdown } = this.state;
     if (!startDate) {
@@ -181,7 +183,13 @@ class Calendar extends React.Component {
           </tr>
         </tbody>
         {this.renderView()}
-        <Guests capacity={capacity} adultCount={adultCount} childCount={childCount} infantCount={infantCount} handleGuestChange={handleGuestChange} />
+        <Guests
+          capacity={capacity}
+          adultCount={adultCount}
+          childCount={childCount}
+          infantCount={infantCount}
+          handleGuestChange={handleGuestChange}
+        />
       </table>
     );
   }
@@ -190,6 +198,14 @@ class Calendar extends React.Component {
 Calendar.propTypes = {
   capacity: PropTypes.number.isRequired,
   calendar: PropTypes.objectOf(PropTypes.object).isRequired,
+  startDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string.isRequired,
+  handleStartChange: PropTypes.func.isRequired,
+  handleEndChange: PropTypes.func.isRequired,
+  handleGuestChange: PropTypes.func.isRequired,
+  adultCount: PropTypes.number.isRequired,
+  childCount: PropTypes.number.isRequired,
+  infantCount: PropTypes.number.isRequired,
 };
 
 export default Calendar;
