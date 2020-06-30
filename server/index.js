@@ -35,7 +35,6 @@ const makeMonths = (fullCalendar) => {
 };
 
 app.get('/:id', (req, res) => {
-  console.log('initial get')
   res.sendFile(path.resolve(`${__dirname}/../client/dist/index.html`));
 });
 
