@@ -39,7 +39,6 @@ app.get('/:id', (req, res) => {
 });
 
 app.get('/reservation/:id', async (req, res) => {
-  console.log('data get')
   const reservationData = await Reservation.find({ _id: req.params.id }).exec();
   if (reservationData.length === 0) {
     res.status(204).send('reservation does not exist');

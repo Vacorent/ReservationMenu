@@ -44,7 +44,7 @@ class App extends React.Component {
     const setData = this.setData.bind(this);
     const origin = window.location.origin;
     const id = window.location.href.slice(origin.length + 1);
-    axios.get(`/reservation/${id}`)
+    axios.get(`/reservation/10`)
       .then((res) => {
         console.log('res in response is ', res)
         setData(res.data['0'], res.data['1']);

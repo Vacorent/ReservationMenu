@@ -74,9 +74,10 @@ class Calendar extends React.Component {
 
   renderMonthBack() {
     const { currentMonth, currentMonthYear } = this.state;
-    if (currentMonth === Moment().month() && currentMonthYear === Moment().year()) {
+    const { startDate } = this.props;
+    if (currentMonth === Moment().month() && currentMonthYear === Moment().year() || startDate !== '') {
       return (
-        <button onClick={this.prevMonthClick} type="button" className={styles.notAllowed}>{'<'}</button>
+        <button type="button" className={styles.notAllowed}>{'<'}</button>
       );
     }
     return <button onClick={this.prevMonthClick} type="button" className={styles.prevMonthButton}>{'<'}</button>;
@@ -84,9 +85,10 @@ class Calendar extends React.Component {
 
   renderMonthNext() {
     const { currentMonth, currentMonthYear } = this.state;
-    if (currentMonth === (Moment().month() - 2) && currentMonthYear === (Moment().year() + 1)) {
+    const { startDate } = this.props;
+    if (currentMonth === (Moment().month() - 2) && currentMonthYear === (Moment().year() + 1) || startDate !== '') {
       return (
-        <button onClick={this.nextMonthClick} type="button" className={styles.notAllowedNext}>{'>'}</button>
+        <button type="button" className={styles.notAllowedNext}>{'>'}</button>
       );
     }
     return <button onClick={this.nextMonthClick} type="button" className={styles.nextMonthButton}>{'>'}</button>;
