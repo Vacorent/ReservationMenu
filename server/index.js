@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const Reservation = require('../db/Reservation.js');
 const path = require('path');
+const Reservation = require('../db/Reservation.js');
 
 const app = express();
 const PORT = 3004;

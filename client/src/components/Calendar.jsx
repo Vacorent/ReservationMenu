@@ -77,7 +77,7 @@ class Calendar extends React.Component {
   renderMonthBack() {
     const { currentMonth, currentMonthYear } = this.state;
     const { startDate } = this.props;
-    if (currentMonth === Moment().month() && currentMonthYear === Moment().year() || startDate !== '') {
+    if ((currentMonth === Moment().month() && currentMonthYear === Moment().year()) || startDate !== '') {
       return (
         <button type="button" className={styles.notAllowed}>{'<'}</button>
       );
@@ -88,7 +88,7 @@ class Calendar extends React.Component {
   renderMonthNext() {
     const { currentMonth, currentMonthYear } = this.state;
     const { startDate } = this.props;
-    if (currentMonth === (Moment().month() - 2) && currentMonthYear === (Moment().year() + 1) || startDate !== '') {
+    if ((currentMonth === (Moment().month() - 2) && currentMonthYear === (Moment().year() + 1)) || startDate !== '') {
       return (
         <button type="button" className={styles.notAllowedNext}>{'>'}</button>
       );
@@ -154,7 +154,7 @@ class Calendar extends React.Component {
 
   render() {
     const {
-      capacity, adultCount, childCount, infantCount, handleGuestChange, handleCostClose
+      capacity, adultCount, childCount, infantCount, handleGuestChange, handleCostClose,
     } = this.props;
     let { startDate, endDate } = this.props;
     const { isDropdown } = this.state;
@@ -211,6 +211,7 @@ Calendar.propTypes = {
   adultCount: PropTypes.number.isRequired,
   childCount: PropTypes.number.isRequired,
   infantCount: PropTypes.number.isRequired,
+  handleCostClose: PropTypes.func.isRequired,
 };
 
 export default Calendar;
