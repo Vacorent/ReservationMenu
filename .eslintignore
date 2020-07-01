@@ -2,5 +2,6 @@
 **/node_modules
 **/client/dist/bundle.js
 webpack.config.js
-**/test
+**/__test__
+**/__mocks__
 enzyme.config.js

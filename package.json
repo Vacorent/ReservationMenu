@@ -58,8 +58,8 @@
     "setupFiles": [
       "./enzyme.config.js"
     ],
-    "testMatch": [
-      "**/test/**/*.js"
-    ]
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMocks.js"
+    }
   }
 }
