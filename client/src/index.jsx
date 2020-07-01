@@ -374,14 +374,14 @@ class App extends React.Component {
             .
           </span>
           {' '}
-          <a
+          <button
             onClick={this.handleSuggestion}
             onKeyDown={this.handleSuggestion}
             className={styles.addDates}
-            role="presentation"
+            type="button"
           >
             Add these dates
-          </a>
+          </button>
         </div>
         <span className={styles.suggCal} role="img" aria-labelledby="calendar">&#x1F4D6;</span>
       </div>

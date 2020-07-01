@@ -126,6 +126,11 @@ button {
   font-weight: 700;
   text-decoration: underline;
   cursor: pointer;
+  float: left;
+  background-color: white;
+  border-radius: 0;
+  border: 0;
+  font-size: 1.1em;
 }
 
 .suggCal {
