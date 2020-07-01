@@ -1,5 +1,6 @@
 const moment = require('moment');
 require('./index.js');
+const mongoose = require('mongoose');
 const Reservation = require('./Reservation.js');
 
 Reservation.collection.drop();
@@ -35,6 +36,11 @@ Reservation.collection.drop();
       calendar: sampleCalendarDates,
     };
     Reservation.create(sampleReservation)
-      .then(() => console.log('success'));
+      .then((res) => {
+        if(res._id === 100) {
+          console.log('seed complete');
+          mongoose.connection.close()
+        }
+      });
   }
 }());
