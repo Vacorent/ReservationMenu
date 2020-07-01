@@ -15,6 +15,8 @@ class Guests extends React.Component {
   dropdownClick(e) {
     // console.log('table clicked');
     const { isDropdown } = this.state;
+    const { handleCostClose } = this.props;
+    handleCostClose();
     this.setState({
       isDropdown: !isDropdown,
     });
@@ -197,6 +199,7 @@ Guests.propTypes = {
   adultCount: PropTypes.number.isRequired,
   childCount: PropTypes.number.isRequired,
   infantCount: PropTypes.number.isRequired,
+  handleCostClose: PropTypes.func.isRequired,
 };
 
 export default Guests;

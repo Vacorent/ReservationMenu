@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const Reservation = require('../db/Reservation.js');
 const path = require('path');
+const Reservation = require('../db/Reservation.js');
 
 const app = express();
 const PORT = 3004;
@@ -39,7 +39,6 @@ app.get('/:id', (req, res) => {
 });
 
 app.get('/reservation/:id', async (req, res) => {
-  console.log('data get')
   const reservationData = await Reservation.find({ _id: req.params.id }).exec();
   if (reservationData.length === 0) {
     res.status(204).send('reservation does not exist');

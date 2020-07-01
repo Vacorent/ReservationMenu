@@ -60,6 +60,8 @@ class Calendar extends React.Component {
   dropdownClick() {
     // console.log('calendar clicked');
     const { isDropdown } = this.state;
+    const { handleCostClose } = this.props;
+    handleCostClose();
     this.setState({
       isDropdown: !isDropdown,
     });
@@ -74,9 +76,10 @@ class Calendar extends React.Component {
 
   renderMonthBack() {
     const { currentMonth, currentMonthYear } = this.state;
-    if (currentMonth === Moment().month() && currentMonthYear === Moment().year()) {
+    const { startDate } = this.props;
+    if ((currentMonth === Moment().month() && currentMonthYear === Moment().year()) || startDate !== '') {
       return (
-        <button onClick={this.prevMonthClick} type="button" className={styles.notAllowed}>{'<'}</button>
+        <button type="button" className={styles.notAllowed}>{'<'}</button>
       );
     }
     return <button onClick={this.prevMonthClick} type="button" className={styles.prevMonthButton}>{'<'}</button>;
@@ -84,9 +87,10 @@ class Calendar extends React.Component {
 
   renderMonthNext() {
     const { currentMonth, currentMonthYear } = this.state;
-    if (currentMonth === (Moment().month() - 2) && currentMonthYear === (Moment().year() + 1)) {
+    const { startDate } = this.props;
+    if ((currentMonth === (Moment().month() - 2) && currentMonthYear === (Moment().year() + 1)) || startDate !== '') {
       return (
-        <button onClick={this.nextMonthClick} type="button" className={styles.notAllowedNext}>{'>'}</button>
+        <button type="button" className={styles.notAllowedNext}>{'>'}</button>
       );
     }
     return <button onClick={this.nextMonthClick} type="button" className={styles.nextMonthButton}>{'>'}</button>;
@@ -150,7 +154,7 @@ class Calendar extends React.Component {
 
   render() {
     const {
-      capacity, adultCount, childCount, infantCount, handleGuestChange,
+      capacity, adultCount, childCount, infantCount, handleGuestChange, handleCostClose,
     } = this.props;
     let { startDate, endDate } = this.props;
     const { isDropdown } = this.state;
@@ -189,6 +193,7 @@ class Calendar extends React.Component {
           childCount={childCount}
           infantCount={infantCount}
           handleGuestChange={handleGuestChange}
+          handleCostClose={handleCostClose}
         />
       </table>
     );
@@ -206,6 +211,7 @@ Calendar.propTypes = {
   adultCount: PropTypes.number.isRequired,
   childCount: PropTypes.number.isRequired,
   infantCount: PropTypes.number.isRequired,
+  handleCostClose: PropTypes.func.isRequired,
 };
 
 export default Calendar;

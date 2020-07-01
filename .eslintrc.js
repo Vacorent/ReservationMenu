@@ -19,6 +19,7 @@ module.exports = {
     'react',
   ],
   rules: {
-    'no-underscore-dangle': 0
+    'no-underscore-dangle': 0,
+    'jsx-a11y/anchor-is-valid': 0,
   },
 };
