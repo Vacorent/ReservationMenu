@@ -4,7 +4,6 @@
 
 ## Related Projects
 
-  - https://github.com/HRSF128-Appbnb/Appbnb
   - https://github.com/HRSF128-Appbnb/photo-carousel
   - https://github.com/HRSF128-Appbnb/Proxy0
   - https://github.com/HRSF128-Appbnb/PhotoGallery
