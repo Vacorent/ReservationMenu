@@ -1,6 +1,6 @@
 # ReservationMenu
 
-> Project description
+> Reservation portion of vacation rental application
 
 ## Related Projects
 
